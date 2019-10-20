@@ -32,6 +32,64 @@
 </head>
 
 <body class="goto-here">
+			<!-- Modal -->
+			<div class="modal fade" id="modelId" tabindex="-1" role="application" aria-labelledby="modelTitleId"
+			aria-hidden="true">
+			<div class="modal-dialog" role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+						</button>
+					</div>
+					<div class="container">
+						<div class="row no-gutter slider-text align-items-center justify-content-center">
+							<h1 class="text-center">Create question</h1>
+							<div class="modal-body">
+								<div class="p-5">
+									<div class="form-group">
+										<label for="question">Question</label>
+										<input type="text" class="form-control" placeholder="Question">
+									</div>
+									<div class="form-group">
+										<label for="question">Time</label><br>
+										<input type="number" min="1" max="100" value="50" class="slider" id="myRange"
+											placeholder="15">
+									</div>
+	
+									<div class="form-group">
+										<label for="quiz-image">Upload Image</label>
+										<input type="file" class="form-control-file" id="">
+									</div>
+	
+									<div class="form-group">
+										<button type="button" class="btn btn-success btn-circle btn-lg" data-toggle="modal"
+											data-target=""><i class="fa fa-plus"></i>
+										</button>
+										<label for="quiz-image">Add answers</label>
+									</div>
+									<div class="form-inline ">
+											<div class="form-group">
+													<input type="checkbox" value="" class="mr-2"> <span class="input-group-addon"></span> <input type="text" class="form-control" placeholder="Answer 1">
+											</div>
+											<div class="form-group">
+													<input type="checkbox" value="" class="mr-2"> <span class="input-group-addon"></span> <input type="text" class="form-control" placeholder="Answer 2">
+											</div>
+									</div>
+									<br><br>
+									<div class="text-center">
+										<a href="quizz.html" class="btn btn-black py-3 px-5">Create</a>
+									</div>
+								</div>
+	
+	
+							</div>
+	
+						</div>
+					</div>
+				</div>
+			</div>
+		</div><!--End modal-->	
 	<nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar">
 		<div class="container">
 			<a class="navbar-brand" href="index.html">uQuiz</a>
