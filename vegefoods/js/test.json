@@ -63,6 +63,12 @@
       "nickname": "el tachas",
       "quizz": "1000",
       "id": 1118
+    },
+    {
+      "user": 0,
+      "nickname": "modmada",
+      "quizz": "1000",
+      "id": 1119
     }
   ],
   "users": [
@@ -96,7 +102,7 @@
       "questions": [
         {
           "question": "¿Cuál es tu nieve fav?",
-          "time": 0,
+          "time": 90,
           "answers": [
             {
               "answer": "Vainilla",
