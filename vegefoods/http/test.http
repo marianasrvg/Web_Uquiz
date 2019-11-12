@@ -1,0 +1,7 @@
+###
+get http://localhost:3000/users/?firstName=Javier
+Content-Type: application/json
+
+###
+get http://localhost:3000/users/?email=Javier8apar@gmail.com
+Content-Type: application/json
