@@ -21,6 +21,7 @@ function logIn() {
                 alert(`Bienvenido ${user[0].firstName} ${user[0].lastName}`);
                 localStorage.sessionId = "TOKEN";
                 localStorage.sessionName = user[0].firstName;
+                window.location.href="index.html";
             }else{
                 alert("Usuario o contraseña incorrectos");
             }
