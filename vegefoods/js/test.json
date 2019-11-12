@@ -69,6 +69,12 @@
       "nickname": "modmada",
       "quizz": "1000",
       "id": 1119
+    },
+    {
+      "user": 0,
+      "nickname": "javi",
+      "quizz": "1000",
+      "id": 1120
     }
   ],
   "users": [
@@ -116,7 +122,7 @@
         },
         {
           "question": "¿Qué paleta te gusta más",
-          "time": 0,
+          "time": 60,
           "answers": [
             {
               "answer": "Limón",
