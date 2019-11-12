@@ -81,11 +81,11 @@
 					font-weight: 300;">Enter pin</h1>
             <div class="p-5">
               <div class="form-group">
-                <input type="text" class="form-control text-center" placeholder="pin">
+                <input id="input_pin" type="text" class="form-control text-center" placeholder="pin">
               </div>
               <div class="form-group">
                 <!-- Button trigger modal -->
-                <button type="button" class="btn btn-primary py-3 px-5" data-toggle="modal" data-target="#modelId">
+                <button id="btn_pin" type="button" class="btn btn-primary py-3 px-5">
                   Play
                 </button>
               </div>
@@ -115,10 +115,11 @@
               <h1 class="col-md-12 mb-0 bread text-center">Enter nickname</h1>
               <div class="p-5">
                 <div class="form-group">
-                  <input type="text" class="form-control text-center" placeholder="nickname">
+                  <input id="nickname" type="text" class="form-control text-center" placeholder="nickname">
                 </div>
                 <div class="form-group">
-                  <a href="quizz.html" class="btn btn-primary py-3 px-4">Play</a>
+                  <!--href="quizz.html"-->
+                  <a id="btn_play" class="btn btn-primary py-3 px-4">Play</a>
                 </div>
                 <div class="col-md-12 mb-3">
                   <a href="log-in.html">Log In</a>
@@ -221,6 +222,7 @@
   </script>
   <script src="js/google-map.js"></script>
   <script src="js/main.js"></script>
+  <script src="js/enter-pin.js"></script>
 
 </body>
 

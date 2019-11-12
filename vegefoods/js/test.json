@@ -1,0 +1,128 @@
+{
+  "quizzresults": [
+    {
+      "id": 1111,
+      "quizz": 1000,
+      "user": 1230,
+      "nickname": "Javi",
+      "score": 50,
+      "time": 77,
+      "answers": [
+        {
+          "question": "question number 1",
+          "correct": true,
+          "time": 55,
+          "answer": "A"
+        },
+        {
+          "question": "question number 2",
+          "correct": false,
+          "time": 22,
+          "answer": "B"
+        }
+      ]
+    },
+    {
+      "user": 0,
+      "nickname": "Mari",
+      "quizz": "1000",
+      "id": 1112
+    },
+    {
+      "user": 0,
+      "nickname": "Mariana",
+      "quizz": "1000",
+      "id": 1113
+    },
+    {
+      "user": 0,
+      "nickname": "Javi",
+      "quizz": "1000",
+      "id": 1114
+    },
+    {
+      "user": 0,
+      "nickname": "Javi",
+      "quizz": "1000",
+      "id": 1115
+    },
+    {
+      "user": 0,
+      "nickname": "Peque peque",
+      "quizz": "1000",
+      "id": 1116
+    },
+    {
+      "user": 0,
+      "nickname": "peque",
+      "quizz": "1000",
+      "id": 1117
+    },
+    {
+      "user": 0,
+      "nickname": "el tachas",
+      "quizz": "1000",
+      "id": 1118
+    }
+  ],
+  "users": [
+    {
+      "firstName": "Javier",
+      "lastName": "Ochoa",
+      "email": "Javier8apar@gmail.com",
+      "password": "patito1",
+      "admin": true,
+      "id": 1230
+    },
+    {
+      "firstName": "Marianita",
+      "lastName": "Popo",
+      "email": "MarianaSierra@microsoft.com",
+      "password": "passwordPopo",
+      "admin": false,
+      "id": 30
+    }
+  ],
+  "quizzes": [
+    {
+      "id": 1000,
+      "name": "",
+      "description": "",
+      "url": "",
+      "creator": "",
+      "best-score": 0,
+      "worst-score": 0,
+      "played": 0,
+      "questions": [
+        {
+          "question": "¿Cuál es tu nieve fav?",
+          "time": 0,
+          "answers": [
+            {
+              "answer": "Vainilla",
+              "correct": true
+            },
+            {
+              "answer": "Chocolate",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "question": "¿Qué paleta te gusta más",
+          "time": 0,
+          "answers": [
+            {
+              "answer": "Limón",
+              "correct": true
+            },
+            {
+              "answer": "Vainilla",
+              "correct": false
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
