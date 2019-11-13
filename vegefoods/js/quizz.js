@@ -62,8 +62,8 @@ let loadQuestions = (index) => {
         </div>`
     }).join("");
     answers.innerHTML = html;
-    console.log(quizz.questions[index]);
-    console.log(quizz.questions[index].time);
+    //console.log(quizz.questions[index]);
+    //console.log(quizz.questions[index].time);
     min = Math.floor(quizz.questions[index].time / 60);
     sec = quizz.questions[index].time % 60 | 0;
 }
@@ -106,7 +106,40 @@ function storeAnswer(event) {
         newAnswer.correct = true;
     }
     quizzResults.answers[index] = newAnswer;
+
     index++;
+
+    if(quizz.questions[index]==undefined){
+        
+        let totalScore = 0;
+        let totalTime = 0;
+        quizzResults.answers.forEach(element => {
+            totalTime+=element.time;
+            if(element.correct)
+                totalScore++;
+        });
+
+        let scorePercentage = (totalScore/quizzResults.answers.length) * 100;
+        quizzResults.time = totalTime;
+        quizzResults.score = scorePercentage;
+              
+        console.log(quizzResults);
+
+        let xhr = new XMLHttpRequest();
+        let endpoint = `http://localhost:3000/quizzresults/${quizzResults.id}`
+        xhr.open('PUT', endpoint);
+        xhr.setRequestHeader('Content-Type', 'application/json');
+        xhr.send(JSON.stringify(quizzResults));
+        xhr.onload = () => {
+            if(xhr.status == 200){
+                localStorage.quizz = "";
+                localStorage.score = scorePercentage;
+                window.location.href = "score.html";
+            }
+        }
+    }
+        
+
     loadQuestions(index);
 }
 
