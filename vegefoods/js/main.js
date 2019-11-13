@@ -362,7 +362,6 @@
  function onLoad() {
  	let loginUser = document.querySelector('#loginUser');
 
- 	console.log(loginUser);
  	if (localStorage.sessionId == undefined || localStorage.sessionId == "") {
  		console.log("no hay usuario logueado");
  		loginUser.innerHTML = `<a class="nav-link" href="log-in.html">Log In</a>`;
