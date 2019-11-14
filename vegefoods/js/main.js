@@ -299,7 +299,6 @@
 
 
  	var goHere = function () {
-
  		$('.mouse-icon').on('click', function (event) {
 
  			event.preventDefault();
@@ -314,6 +313,7 @@
  	goHere();
 
 
+
  	function makeTimer() {
 
  		var endTime = new Date("21 December 2019 9:56:00 GMT+01:00");
@@ -323,6 +323,7 @@
  		now = (Date.parse(now) / 1000);
 
  		var timeLeft = endTime - now;
+
 
  		var days = Math.floor(timeLeft / 86400);
  		var hours = Math.floor((timeLeft - (days * 86400)) / 3600);
@@ -346,9 +347,7 @@
 
  	}
 
- 	setInterval(function () {
- 		makeTimer();
- 	}, 1000);
+ 	//setInterval(function() { makeTimer(); }, 1000);
 
 
 
@@ -381,3 +380,5 @@
  function signOut() {
  	localStorage.clear();
  }
+
+
