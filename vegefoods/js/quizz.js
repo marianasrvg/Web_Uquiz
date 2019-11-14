@@ -123,7 +123,7 @@ function storeAnswer(event) {
         quizzResults.time = totalTime;
         quizzResults.score = scorePercentage;
               
-        console.log(quizzResults);
+        //console.log(quizzResults);
 
         let xhr = new XMLHttpRequest();
         let endpoint = `http://localhost:3000/quizzresults/${quizzResults.id}`
