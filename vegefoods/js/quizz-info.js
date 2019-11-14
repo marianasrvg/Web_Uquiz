@@ -17,7 +17,6 @@ let loadData = () => {
         xhr.onload = () => {
             if(xhr.status == 200){
                 quizz = JSON.parse(xhr.response);
-                localStorage.removeItem("quizzDetails");
                 loadHTML();
             }
             return;
@@ -28,37 +27,22 @@ let loadData = () => {
 }
 
 let loadHTML = () => {
-    console.log(quizz);
     name.innerText = quizz.name;
-    //played.textContent = quizz.played;
-    //bestScore.textContent = quizz.bestScore;
-    //worstScore.textContent = quizz.worstScore;
-    played.setAttribute("data-number", quizz.played);
-    bestScore.setAttribute("data-number", quizz.bestScore);
-    worstScore.setAttribute("data-number", quizz.worstScore);
-    makeCount();
-    //setInterval(function() { makeCount(); }, 100);
+    makeAnimationCount();
+    localStorage.removeItem("quizzDetails");
 }
 
-let makeCount = () => {
-    //console.log(played.innerText);
-    //console.log(played.getAttribute("data-number"));
-    //console.log(played);
+let makeAnimationCount = () => {
     
-    let count = Number(played.innerHTML);
-    let lim = Number(played.getAttribute("data-number"));
-    console.log(count);
-    console.log(lim);
     $('#played').animateNumber({
-        number: 50
-    });
-    // console.log(count);
-    // console.log(lim);
-    // if(count == lim){
-    //      return;
-    // }
-    // count++;
-    // played.textContent = count;
+        number: quizz.played
+    }, 5000);
+    $('#best-score').animateNumber({
+        number: quizz.bestScore
+    }, 5000);
+    $('#worst-score').animateNumber({
+        number: quizz.worstScore
+    }, 5000);
     
 }
 

@@ -65,6 +65,50 @@
       ],
       "time": 2,
       "score": 100
+    },
+    {
+      "user": 0,
+      "nickname": "El tachas3",
+      "quizz": "1000",
+      "id": 1115,
+      "answers": [
+        {
+          "time": 9,
+          "question": "¿Cuál es tu nieve fav?",
+          "answer": "VAINILLA",
+          "correct": true
+        },
+        {
+          "time": 5,
+          "question": "¿Qué paleta te gusta más",
+          "answer": "VAINILLA",
+          "correct": false
+        }
+      ],
+      "time": 14,
+      "score": 50
+    },
+    {
+      "user": 0,
+      "nickname": "lol",
+      "quizz": "1000",
+      "id": 1116,
+      "answers": [
+        {
+          "time": 20,
+          "question": "¿Cuál es tu nieve fav?",
+          "answer": "VAINILLA",
+          "correct": true
+        },
+        {
+          "time": 2,
+          "question": "¿Qué paleta te gusta más",
+          "answer": "VAINILLA",
+          "correct": false
+        }
+      ],
+      "time": 22,
+      "score": 50
     }
   ],
   "users": [
@@ -94,7 +138,7 @@
       "creator": "",
       "bestScore": 100,
       "worstScore": 30,
-      "played": 50,
+      "played": 60,
       "questions": [
         {
           "question": "¿Cuál es tu nieve fav?",
