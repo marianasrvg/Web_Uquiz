@@ -65,6 +65,112 @@
       ],
       "time": 2,
       "score": 100
+    },
+    {
+      "user": 0,
+      "nickname": "prueba",
+      "quizz": "1000",
+      "id": 1115
+    },
+    {
+      "user": 0,
+      "nickname": "javier",
+      "quizz": "1000",
+      "id": 1116,
+      "answers": [
+        {
+          "time": 2,
+          "question": "¿Cuál es tu nieve fav?",
+          "answer": "VAINILLA",
+          "correct": true
+        },
+        {
+          "time": 1,
+          "question": "¿Qué paleta te gusta más",
+          "answer": "VAINILLA",
+          "correct": false
+        }
+      ],
+      "time": 3,
+      "score": 50
+    },
+    {
+      "user": 0,
+      "nickname": "el tachas 4",
+      "quizz": "1000",
+      "id": 1117,
+      "answers": [
+        {
+          "time": 2,
+          "question": "¿Cuál es tu nieve fav?",
+          "answer": "VAINILLA",
+          "correct": true
+        },
+        {
+          "time": 2,
+          "question": "¿Qué paleta te gusta más",
+          "answer": "LIMÓN",
+          "correct": true
+        }
+      ],
+      "time": 4,
+      "score": 100
+    },
+    {
+      "user": 0,
+      "nickname": "Popo",
+      "quizz": "1000",
+      "id": 1118
+    },
+    {
+      "user": 0,
+      "nickname": "popo",
+      "quizz": "1000",
+      "id": 1119
+    },
+    {
+      "user": 0,
+      "nickname": "fsdf",
+      "quizz": "1000",
+      "id": 1120,
+      "answers": [
+        {
+          "time": 4,
+          "question": "¿Cuál es tu nieve fav?",
+          "answer": "VAINILLA",
+          "correct": true
+        },
+        {
+          "time": 2,
+          "question": "¿Qué paleta te gusta más",
+          "answer": "VAINILLA",
+          "correct": false
+        }
+      ],
+      "time": 6,
+      "score": 50
+    },
+    {
+      "user": 0,
+      "nickname": "Javier",
+      "quizz": "1000",
+      "id": 1121,
+      "answers": [
+        {
+          "time": 2,
+          "question": "¿Cuál es tu nieve fav?",
+          "answer": "VAINILLA",
+          "correct": true
+        },
+        {
+          "time": 2,
+          "question": "¿Qué paleta te gusta más",
+          "answer": "LIMÓN",
+          "correct": true
+        }
+      ],
+      "time": 4,
+      "score": 100
     }
   ],
   "users": [
@@ -73,7 +179,6 @@
       "lastName": "Ochoa",
       "email": "Javier8apar@gmail.com",
       "password": "patito1",
-      "admin": true,
       "id": 1230
     },
     {
@@ -83,18 +188,95 @@
       "password": "passwordPopo",
       "admin": false,
       "id": 30
+    },
+    {
+      "firstName": "fdsfk",
+      "lastName": "fdfds",
+      "email": "a@a",
+      "password": "sep",
+      "id": 1231
+    },
+    {
+      "firstName": "fdsa",
+      "lastName": "fads",
+      "email": "a@a",
+      "password": "sep",
+      "id": 1232
+    },
+    {
+      "firstName": "vdva",
+      "lastName": "FEGDF",
+      "email": "a@a",
+      "password": "sep",
+      "id": 1233
+    },
+    {
+      "firstName": "sep",
+      "lastName": "sep",
+      "email": "se@p",
+      "password": "sep",
+      "id": 1234
+    },
+    {
+      "firstName": "maris",
+      "lastName": "popo",
+      "email": "maris@microsoft.com",
+      "password": "patito",
+      "id": 1235
+    },
+    {
+      "firstName": "Diego",
+      "lastName": "Ascencio",
+      "email": "",
+      "password": "patito2",
+      "id": 1236
+    },
+    {
+      "firstName": "Diego",
+      "lastName": "Ascencio",
+      "email": "diego@gmail.com",
+      "password": "patito",
+      "id": 1237
+    },
+    {
+      "firstName": "javier",
+      "lastName": "dfds",
+      "email": "a@a",
+      "password": "sep",
+      "id": 1238
+    },
+    {
+      "firstName": "diego",
+      "lastName": "dsafas",
+      "email": "diego@gmail.com",
+      "password": "123",
+      "id": 1239
+    },
+    {
+      "firstName": "Diego",
+      "lastName": "asdc",
+      "email": "diego@gmail.com",
+      "password": "123",
+      "id": 1240
+    },
+    {
+      "firstName": "Diego",
+      "lastName": "Ascencio",
+      "email": "diego@gmail.com",
+      "password": "123",
+      "id": 1241
     }
   ],
   "quizzes": [
     {
       "id": 1000,
-      "name": "",
-      "description": "",
+      "name": "Prueba",
+      "description": "Descripcion",
       "url": "",
       "creator": "",
-      "best-score": 0,
-      "worst-score": 0,
-      "played": 0,
+      "bestScore": 100,
+      "worstScore": 30,
+      "played": 50,
       "questions": [
         {
           "question": "¿Cuál es tu nieve fav?",
