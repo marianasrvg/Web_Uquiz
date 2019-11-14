@@ -22,13 +22,20 @@ input_pin.addEventListener("keyup", (e) => {
 let getUserName = () => {
     if(localStorage.sessionId != undefined){
         //obtienes el user
+        if(localStorage.userId != ""){
         //muestras el nombre del usuario en el nickname
+            nickname.value = localStorage.sessionName;
         //agregar el id a quizzresults
+            quizzResults.user = localStorage.userId;
+        }
+        
         console.log(localStorage.sessionId);
+    }else{
+
+        console.log("Usuario dummy");
+        quizzResults.user = 0;
+        console.log(quizzResults);
     }
-    console.log("Usuario dummy");
-    quizzResults.user = 0;
-    console.log(quizzResults);
 }
 
 let verifyQuizz = (e) => {
