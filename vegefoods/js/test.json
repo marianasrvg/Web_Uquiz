@@ -88,13 +88,13 @@
   "quizzes": [
     {
       "id": 1000,
-      "name": "",
-      "description": "",
+      "name": "Prueba",
+      "description": "Descripcion",
       "url": "",
       "creator": "",
-      "best-score": 0,
-      "worst-score": 0,
-      "played": 0,
+      "bestScore": 100,
+      "worstScore": 30,
+      "played": 50,
       "questions": [
         {
           "question": "¿Cuál es tu nieve fav?",

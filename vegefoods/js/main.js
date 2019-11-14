@@ -191,15 +191,14 @@
  						numberStep: comma_separator_number_step
  					}, 7000);
  				});
-
  			}
-
  		}, {
  			offset: '95%'
  		});
 
  	}
- 	counter();
+	//counter();
+	
 
  	var contentWayPoint = function () {
  		var i = 0;
@@ -380,5 +379,3 @@
  function signOut() {
  	localStorage.clear();
  }
-
-
