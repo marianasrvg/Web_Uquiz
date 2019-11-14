@@ -1,6 +1,7 @@
 "use strict";
 localStorage.sessionId;
 localStorage.sessionName;
+localStorage.userId;
 
 //VARIABLES FROM INPUT TEXTS
 let userEmail = document.querySelector('#userEmail');
@@ -21,6 +22,7 @@ function logIn() {
                 alert(`Bienvenido ${user[0].firstName} ${user[0].lastName}`);
                 localStorage.sessionId = "TOKEN";
                 localStorage.sessionName = user[0].firstName;
+                localStorage.userId = user[0].id;
                 window.location.href="index.html";
             }else{
                 alert("Usuario o contraseña incorrectos");
