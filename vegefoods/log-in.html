@@ -31,7 +31,7 @@
 	<link rel="stylesheet" href="css/style.css">
 </head>
 
-<body class="goto-here">
+<body class="goto-here" onload="onLoad()">
 	<nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar">
 		<div class="container">
 			<a class="navbar-brand" href="index.html">uQuiz</a>
@@ -52,10 +52,19 @@
 						</div>
 					</li>
 					<li class="nav-item"><a href="about.html" class="nav-link">About Us</a></li>
-					<li class="nav-item">
-						<a class="nav-link" href="log-in.html">Log In</a>
-
-					</li>
+					<li class="nav-item dropdown" id="loginUser">
+							<!--Login-->
+							<!--<a class="nav-link" href="log-in.html">Log In</a>-->
+							<!--END Login-->
+							<!--User logged-->
+							<a class="nav-link dropdown-toggle" href="profile.html" id="dropdown99" data-toggle="dropdown"
+								aria-haspopup="true" aria-expanded="false">(user name)</a>
+							<div class="dropdown-menu" aria-labelledby="dropdown99">
+								<a class="dropdown-item" href="profile.html">Edit</a>
+								<a class="dropdown-item" href="index.html">Sign Out</a>
+							</div>
+							<!--END User logged-->
+						</li>
 				</ul>
 			</div>
 		</div>
@@ -83,20 +92,21 @@
 							<div class="col-md-12">
 								<div class="form-group">
 									<label for="firstname">Email</label>
-									<input type="text" class="form-control" placeholder="Email">
+									<input id="userEmail" type="text" class="form-control" placeholder="Email">
 								</div>
 							</div>
 							<div class="w-100"></div>
 							<div class="col-md-12">
 								<div class="form-group">
 									<label for="quiz-desc">Password</label>
-									<input type="password" class="form-control" placeholder="Password">
+									<input id="userPassword" type="password" class="form-control"
+										placeholder="Password">
 								</div>
 							</div>
 
 
 							<div class="col-md-12">
-								<a href="index.html" class="btn btn-primary py-3 px-5">Log in</a><span
+								<a onclick="logIn()" class="btn btn-primary py-3 px-5" style="color: white;">Log in</a><span
 									class="mr-3"></span>
 								<a href="sign-up.html" class="btn btn-primary py-3 px-5">Sign up</a>
 							</div>
@@ -209,7 +219,7 @@
 			<circle class="path" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke-miterlimit="10"
 				stroke="#F96D00" /></svg></div>
 
-
+	<script src="js/log-in.js"></script>
 	<script src="js/jquery.min.js"></script>
 	<script src="js/jquery-migrate-3.0.1.min.js"></script>
 	<script src="js/popper.min.js"></script>

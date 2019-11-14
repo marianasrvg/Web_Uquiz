@@ -24,63 +24,47 @@
     },
     {
       "user": 0,
-      "nickname": "Mari",
+      "nickname": "pruebaBuena",
       "quizz": "1000",
-      "id": 1112
-    },
-    {
-      "user": 0,
-      "nickname": "Mariana",
-      "quizz": "1000",
-      "id": 1113
+      "id": 1112,
+      "answers": [
+        {
+          "time": 6,
+          "question": "¿Cuál es tu nieve fav?",
+          "answer": "VAINILLA",
+          "correct": true
+        },
+        {
+          "time": 1,
+          "question": "¿Qué paleta te gusta más",
+          "answer": "LIMÓN",
+          "correct": true
+        }
+      ],
+      "time": 7,
+      "score": 100
     },
     {
       "user": 0,
       "nickname": "Javi",
       "quizz": "1000",
-      "id": 1114
-    },
-    {
-      "user": 0,
-      "nickname": "Javi",
-      "quizz": "1000",
-      "id": 1115
-    },
-    {
-      "user": 0,
-      "nickname": "Peque peque",
-      "quizz": "1000",
-      "id": 1116
-    },
-    {
-      "user": 0,
-      "nickname": "peque",
-      "quizz": "1000",
-      "id": 1117
-    },
-    {
-      "user": 0,
-      "nickname": "el tachas",
-      "quizz": "1000",
-      "id": 1118
-    },
-    {
-      "user": 0,
-      "nickname": "modmada",
-      "quizz": "1000",
-      "id": 1119
-    },
-    {
-      "user": 0,
-      "nickname": "Brady",
-      "quizz": "1000",
-      "id": 1120
-    },
-    {
-      "user": 0,
-      "nickname": "Mariana",
-      "quizz": "1000",
-      "id": 1121
+      "id": 1114,
+      "answers": [
+        {
+          "time": 1,
+          "question": "¿Cuál es tu nieve fav?",
+          "answer": "VAINILLA",
+          "correct": true
+        },
+        {
+          "time": 1,
+          "question": "¿Qué paleta te gusta más",
+          "answer": "LIMÓN",
+          "correct": true
+        }
+      ],
+      "time": 2,
+      "score": 100
     }
   ],
   "users": [
@@ -128,7 +112,7 @@
         },
         {
           "question": "¿Qué paleta te gusta más",
-          "time": 0,
+          "time": 60,
           "answers": [
             {
               "answer": "Limón",
