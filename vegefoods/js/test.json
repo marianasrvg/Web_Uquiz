@@ -92,8 +92,8 @@
   "quizzes": [
     {
       "id": 1000,
-      "name": "",
-      "description": "",
+      "name": "Prueba",
+      "description": "Descripcion",
       "url": "",
       "creator": "",
       "best-score": 0,
