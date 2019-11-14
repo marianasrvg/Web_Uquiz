@@ -75,6 +75,12 @@
       "nickname": "Brady",
       "quizz": "1000",
       "id": 1120
+    },
+    {
+      "user": 0,
+      "nickname": "Mariana",
+      "quizz": "1000",
+      "id": 1121
     }
   ],
   "users": [

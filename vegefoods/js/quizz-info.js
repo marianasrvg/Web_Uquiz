@@ -28,14 +28,39 @@ let loadData = () => {
 }
 
 let loadHTML = () => {
-    //console.log(quizz);
+    console.log(quizz);
     name.innerText = quizz.name;
-    played.innerText = quizz.played;
-    bestScore.innerText = quizz.bestScore;
-    worstScore.innerText = quizz.worstScore;
-    // played.setAttribute("data-number", quizz.played);
-    // bestScore.setAttribute("data-number", quizz.bestScore);
-    // worstScore.setAttribute("data-number", quizz.worstScore);
+    //played.textContent = quizz.played;
+    //bestScore.textContent = quizz.bestScore;
+    //worstScore.textContent = quizz.worstScore;
+    played.setAttribute("data-number", quizz.played);
+    bestScore.setAttribute("data-number", quizz.bestScore);
+    worstScore.setAttribute("data-number", quizz.worstScore);
+    makeCount();
+    //setInterval(function() { makeCount(); }, 100);
 }
+
+let makeCount = () => {
+    //console.log(played.innerText);
+    //console.log(played.getAttribute("data-number"));
+    //console.log(played);
+    
+    let count = Number(played.innerHTML);
+    let lim = Number(played.getAttribute("data-number"));
+    console.log(count);
+    console.log(lim);
+    $('#played').animateNumber({
+        number: 50
+    });
+    // console.log(count);
+    // console.log(lim);
+    // if(count == lim){
+    //      return;
+    // }
+    // count++;
+    // played.textContent = count;
+    
+}
+
 
 loadData();
