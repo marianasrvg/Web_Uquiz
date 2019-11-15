@@ -122,8 +122,26 @@ function storeAnswer(event) {
         let scorePercentage = (totalScore/quizzResults.answers.length) * 100;
         quizzResults.time = totalTime;
         quizzResults.score = scorePercentage;
+
+
+        if(quizzResults.score >= quizz.bestScore){
+            quizz.bestScore = quizzResults.score;
+        }
+
+        if(quizzResults.score <= quizz.worstScore){
+            quizz.worstScore = quizzResults.score;
+        }
               
         //console.log(quizzResults);
+        let xhr2 = new XMLHttpRequest();
+        let endpoint2 = `http://localhost:3000/quizzes/${localStorage.pin}`
+        xhr2.open('PUT', endpoint2);
+        xhr2.setRequestHeader('Content-Type', 'application/json');
+        xhr2.send(JSON.stringify(quizz));
+        xhr2.onload = () => {
+            if(xhr2.status == 200){
+            }
+        }
 
         let xhr = new XMLHttpRequest();
         let endpoint = `http://localhost:3000/quizzresults/${quizzResults.id}`
@@ -137,6 +155,8 @@ function storeAnswer(event) {
                 window.location.href = "score.html";
             }
         }
+
+        
     }
         
 
