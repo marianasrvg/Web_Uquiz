@@ -17,6 +17,7 @@ function signUp() {
     newUser.firstName = userFirstName.value;
     newUser.lastName = userLastName.value;
     newUser.email = userEmail.value;
+    newUser.admin = 0;
     if(userPassword.value!=userPasswordConfirm.value){
         alert(`Contraseñas no coinciden`);
         userPassword.value = "";
