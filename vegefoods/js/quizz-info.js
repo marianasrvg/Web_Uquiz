@@ -33,7 +33,6 @@ let loadHTML = () => {
 }
 
 let makeAnimationCount = () => {
-    
     $('#played').animateNumber({
         number: quizz.played
     }, 5000);
@@ -43,8 +42,6 @@ let makeAnimationCount = () => {
     $('#worst-score').animateNumber({
         number: quizz.worstScore
     }, 5000);
-    
 }
-
 
 loadData();
