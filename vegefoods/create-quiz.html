@@ -31,6 +31,7 @@
 	<link rel="stylesheet" href="css/style.css">
 </head>
 
+
 <body onload="onLoad()" class="goto-here">
 	<nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar">
 		<div class="container">
@@ -66,6 +67,7 @@
 						<!--END User logged-->
 					</li>
 				</ul>
+
 			</div>
 		</div>
 	</nav>
@@ -109,8 +111,6 @@
 			<div class="row no-gutters slider-text align-items-center justify-content-center">
 				<div class="col-md-9 ftco-animate text-center">
 					<p class="breadcrumbs">
-						<!--<span class="mr-2"><a href="index.html">Home</a></span> 
-				<span>Checkout</span></p>-->
 						<h1 class="mb-0 bread">Create Quizz</h1>
 				</div>
 			</div>
@@ -128,14 +128,14 @@
 							<div class="col-md-12">
 								<div class="form-group">
 									<label for="firstname">Quizz Name</label>
-									<input type="text" class="form-control" placeholder="Quiz Name">
+									<input id="quizz-name" type="text" class="form-control" placeholder="Quiz Name">
 								</div>
 							</div>
 							<div class="w-100"></div>
 							<div class="col-md-12">
 								<div class="form-group">
 									<label for="quiz-desc">Description</label>
-									<textarea name="" id="" cols="30" rows="7" class="form-control"
+									<textarea name="" id="quizz-description" cols="30" rows="7" class="form-control"
 										placeholder="Description"></textarea>
 
 								</div>
@@ -144,7 +144,7 @@
 								<div class="form-group mt-4">
 									<div class="form-group">
 										<label for="quiz-image">Upload Image</label>
-										<input type="file" class="form-control-file" id="">
+										<input id="quizz-image" type="file" class="form-control-file" id="">
 									</div>
 								</div>
 							</div>
@@ -166,40 +166,41 @@
 						</div>
 						<!---preguntas-->
 						<table class="table">
-							<tbody></tbody>
-							<tr class="text-center">
-								<td class="product-name">
-									<a href="quizz-info.html">
-										<h3>Question #1</h3>
-									</a>
-								</td>
-								<td class="product-remove">
-									<a href="#"><span class="ion-ios-close"></span></a>
-									<a href="#"><span class="ion-ios-more"></span></a>
-								</td>
-							</tr><!-- END TR-->
-							<tr class="text-center">
-								<td class="product-name">
-									<a href="quizz-info.html">
-										<h3>Question #2</h3>
-									</a>
-								</td>
-								<td class="product-remove">
-									<a href="#"><span class="ion-ios-close"></span></a>
-									<a href="#"><span class="ion-ios-more"></span></a>
-								</td>
-							</tr><!-- END TR-->
-							<tr class="text-center">
-								<td class="product-name">
-									<a href="quizz-info.html">
-										<h3>Question #3</h3>
-									</a>
-								</td>
-								<td class="product-remove">
-									<a href="#"><span class="ion-ios-close"></span></a>
-									<a href="#"><span class="ion-ios-more"></span></a>
-								</td>
-							</tr><!-- END TR-->
+							<tbody id="question-list">
+								<tr class="text-center">
+									<td class="product-name">
+										<a href="quizz-info.html">
+											<h3>Question #1</h3>
+										</a>
+									</td>
+									<td class="product-remove">
+										<a href="#"><span class="ion-ios-close"></span></a>
+										<a href="#"><span class="ion-ios-more"></span></a>
+									</td>
+								</tr><!-- END TR-->
+								<tr class="text-center">
+									<td class="product-name">
+										<a href="quizz-info.html">
+											<h3>Question #2</h3>
+										</a>
+									</td>
+									<td class="product-remove">
+										<a href="#"><span class="ion-ios-close"></span></a>
+										<a href="#"><span class="ion-ios-more"></span></a>
+									</td>
+								</tr><!-- END TR-->
+								<tr class="text-center">
+									<td class="product-name">
+										<a href="quizz-info.html">
+											<h3>Question #3</h3>
+										</a>
+									</td>
+									<td class="product-remove">
+										<a href="#"><span class="ion-ios-close"></span></a>
+										<a href="#"><span class="ion-ios-more"></span></a>
+									</td>
+								</tr><!-- END TR-->
+							</tbody>
 						</table>
 						<!---End preguntas-->
 					</div>
@@ -213,9 +214,12 @@
 	<div class="container">
 		<div class="row justify-content-center">
 			<div class="form-group">
-				<a href="index.html" class="btn btn-black py-3 px-5">Back</a></span>
+				<button id="btn_back" class="btn btn-primary" style="padding: 18px 40px;" >Back</button>
+				<span class="mr-3">
 				<span></span>
-				<a href="index.html" class="btn btn-black py-3 px-5">Create</a></span>
+				<button id="btn_quizz_create" class="btn btn-primary" style="padding: 18px 40px;" >Create</button>
+				<span class="mr-3">
+				<span></span>
 			</div>
 		</div>
 	</div>
@@ -313,6 +317,7 @@
 	</script>
 	<script src="js/google-map.js"></script>
 	<script src="js/main.js"></script>
+	<script src="js/create-quizz.js"></script>
 
 	<script>
 		$(document).ready(function () {

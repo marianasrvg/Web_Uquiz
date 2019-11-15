@@ -541,8 +541,8 @@
       "url": "",
       "creator": "",
       "bestScore": 100,
-      "worstScore": 0,
-      "played": 50,
+      "worstScore": 30,
+      "played": 60,
       "questions": [
         {
           "question": "¿Cuál es tu nieve fav?",
