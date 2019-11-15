@@ -34,44 +34,43 @@
 </head>
 
 <body class="goto-here">
-	<nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar">
-		<div class="container">
-			<a class="navbar-brand" href="index.html">uQuiz</a>
-			<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav"
-				aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
-				<span class="oi oi-menu"></span> Menu
-			</button>
-
-			<div class="collapse navbar-collapse" id="ftco-nav">
-				<ul class="navbar-nav ml-auto">
-					<li class="nav-item active"><a href="index.html" class="nav-link">Home</a></li>
-					<li class="nav-item dropdown">
-						<a class="nav-link dropdown-toggle" href="#" id="dropdown04" data-toggle="dropdown"
-							aria-haspopup="true" aria-expanded="false">Quizzes</a>
-						<div class="dropdown-menu" aria-labelledby="dropdown04">
-							<a class="dropdown-item" href="quizzes_played.html">Played</a>
-							<a class="dropdown-item" href="quizzes_owned.html">Owned</a>
-						</div>
-					</li>
-					<li class="nav-item"><a href="about.html" class="nav-link">About Us</a></li>
-					<li class="nav-item dropdown">
-						<a class="nav-link dropdown-toggle" href="players_feed.html" id="dropdown99"
-							data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Admin</a>
-						<div class="dropdown-menu" aria-labelledby="dropdown99">
-							<a class="dropdown-item" href="players_feed.html">Players</a>
-					</li>
-					<li class="nav-item dropdown">
-						<a class="nav-link dropdown-toggle" href="#" id="dropdown99" data-toggle="dropdown"
-							aria-haspopup="true" aria-expanded="false">Mariana</a>
-						<div class="dropdown-menu" aria-labelledby="dropdown99">
-							<a class="dropdown-item" href="profile.html">Edit</a>
-							<a class="dropdown-item" href="index-log-in.html">Sign Out</a>
-						</div>
-					</li>
-				</ul>
-			</div>
-		</div>
-	</nav>
+		<nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar">
+				<div class="container">
+					<a class="navbar-brand" href="index.html">uQuiz</a>
+					<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav"
+						aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
+						<span class="oi oi-menu"></span> Menu
+					</button>
+		
+					<div class="collapse navbar-collapse" id="ftco-nav">
+						<ul class="navbar-nav ml-auto">
+							<li class="nav-item active"><a href="index.html" class="nav-link">Home</a></li>
+							<li class="nav-item dropdown">
+								<a class="nav-link dropdown-toggle" href="#" id="dropdown04" data-toggle="dropdown"
+									aria-haspopup="true" aria-expanded="false">Quizzes</a>
+								<div class="dropdown-menu" aria-labelledby="dropdown04">
+									<a class="dropdown-item" href="quizzes_played.html">Played</a>
+									<a class="dropdown-item" href="quizzes_owned.html">Owned</a>
+								</div>
+							</li>
+							<li class="nav-item"><a href="about.html" class="nav-link">About Us</a></li>
+							<li class="nav-item dropdown" id="loginUser">
+								<!--Login-->
+								<!--<a class="nav-link" href="log-in.html">Log In</a>-->
+								<!--END Login-->
+								<!--User logged-->
+								<a id="sName" class="nav-link dropdown-toggle" href="profile.html" data-toggle="dropdown"
+									aria-haspopup="true" aria-expanded="false">user name</a>
+								<div class="dropdown-menu" aria-labelledby="dropdown99">
+									<a class="dropdown-item" href="profile.html">Edit</a>
+									<a class="dropdown-item" href="index.html">Sign Out</a>
+								</div>
+								<!--END User logged-->
+							</li>
+						</ul>
+					</div>
+				</div>
+			</nav>
 	<!-- END nav -->
 
 	<div class="hero-wrap hero-bread" style="background-image: url('images/quizzes_played_background.jpg');">
@@ -92,50 +91,33 @@
 						<table class="table">
 							<thead class="thead-primary">
 								<tr class="text-center">
-
-
-									<th>Admin;</th>
-									<th>Photo</th>
+									<th>Admin</th>
+									<th>Id</th>
 									<th>Full Name</th>
 									<th>Email</th>
 									<th>&nbsp;</th>
-
-
-
 								</tr>
 							</thead>
-							<tbody>
+							<tbody id="users-table">
 								<tr class="text-center">
-
 									<td>
 										<input type="checkbox">
 									</td>
-
-									<td class="image-prod">
-										<div class="img" style="background-image:url(images/javier.jpg);">
-										</div>
+									<td>
+										<p id="user-id">Id</p>
 									</td>
-
 									<td class="product-name">
-
-										<h3>Javier</h3>
+										<h3 id>Javier</h3>
 										<p>Ochoa Pardo</p>
-
-
 									</td>
-
-									<td class="price">Javier8apar@gmail.com</td>
-
+									<td class="product-name">
+										<h3>javier8apar@gmail.com</h3>
+									</td>
 									<td class="product-remove">
 										<a href="#"><span class="ion-ios-close"></span></a>
 										<a href="#"><span class="ion-ios-more"></span></a>
 									</td>
-
-
-
 								</tr><!-- END TR-->
-
-
 							</tbody>
 						</table>
 					</div>
@@ -234,6 +216,7 @@
 	</script>
 	<script src="js/google-map.js"></script>
 	<script src="js/main.js"></script>
+	<script src="js/players-feed.js"></script>
 
 	<script>
 		$(document).ready(function () {
