@@ -25,9 +25,9 @@ function loadQuizzInfo (results) {
     xhr.send();
     xhr.onload = () => {
         if(xhr.status == 200){
-            console.log(xhr.response);
-            console.log(results);
-            console.log(JSON.parse(xhr.response));
+            //console.log(xhr.response);
+            //console.log(results);
+            //console.log(JSON.parse(xhr.response));
             return loadQuizzHTML(JSON.parse(xhr.response), results);
         }
     }
@@ -62,7 +62,7 @@ let loadQuizzHTML = (quizz, results) => {
         </td>
         <td class="price">${score}%</td>
         <td class="price">
-            ${time}
+            ${time} secs
         </td>
     <td class="price">Quizz total time min</td>
     </tr>`
