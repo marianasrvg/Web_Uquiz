@@ -504,7 +504,23 @@
       "user": "1244",
       "nickname": "admin",
       "quizz": "1000",
-      "id": 1142
+      "id": 1142,
+      "answers": [
+        {
+          "time": 0,
+          "question": "¿Cuál es tu nieve fav?",
+          "answer": "CHOCOLATE",
+          "correct": false
+        },
+        {
+          "time": 1,
+          "question": "¿Qué paleta te gusta más",
+          "answer": "VAINILLA",
+          "correct": false
+        }
+      ],
+      "time": 1,
+      "score": 0
     }
   ],
   "users": [
@@ -541,8 +557,8 @@
       "url": "",
       "creator": "",
       "bestScore": 100,
-      "worstScore": 30,
-      "played": 60,
+      "worstScore": 0,
+      "played": 50,
       "questions": [
         {
           "question": "¿Cuál es tu nieve fav?",
