@@ -355,10 +355,12 @@
  //LOGIN/NAME
  localStorage.sessionId;
  localStorage.sessionName;
+ localStorage.isAdmin;
 
  //USER LOGIN SWITCHER
  function onLoad() {
- 	let loginUser = document.querySelector('#loginUser');
+	 let loginUser = document.querySelector('#loginUser');
+	 let adminUser = document.querySelector('#adminUser');
 
  	if (localStorage.sessionId == undefined || localStorage.sessionId == "") {
  		console.log("no hay usuario logueado");
@@ -372,10 +374,26 @@
         <a class="dropdown-item" href="profile.html">Edit</a>
         <a onclick="signOut()" class="dropdown-item" href="index.html">Sign Out</a>
     </div>`;
- 	}
+	 }
+
+	console.log(localStorage.isAdmin) ;
+	 if (localStorage.isAdmin != 1 ) {
+		console.log("no es admin");
+		adminUser.innerHTML = ``;
+	}else{
+		adminUser.innerHTML = `<a class="nav-link dropdown-toggle" href="players_feed.html" id="dropdown99"
+		data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Admin</a>
+	<div class="dropdown-menu" aria-labelledby="dropdown99">
+		<a class="dropdown-item" href="players_feed.html">Players</a>`
+	} 
  }
 
+ let signout = document.querySelector("#signOut");
  //SIGN OUT 
  function signOut() {
  	localStorage.clear();
  }
+
+ signout.addEventListener("click",signOut);
+
+

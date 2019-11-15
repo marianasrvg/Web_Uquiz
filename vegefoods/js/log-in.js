@@ -2,6 +2,7 @@
 localStorage.sessionId;
 localStorage.sessionName;
 localStorage.userId;
+localStorage.isAdmin;
 
 //VARIABLES FROM INPUT TEXTS
 let userEmail = document.querySelector('#userEmail');
@@ -23,6 +24,7 @@ function logIn() {
                 localStorage.sessionId = "TOKEN";
                 localStorage.sessionName = user[0].firstName;
                 localStorage.userId = user[0].id;
+                localStorage.isAdmin = user[0].admin;
                 window.location.href="index.html";
             }else{
                 alert("Usuario o contraseña incorrectos");
