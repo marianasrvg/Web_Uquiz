@@ -38,7 +38,8 @@ let loadUsersHTML = () => {
                     </td>
                     <td class="product-remove">
                         <a id="${user.id}" ><span class="ion-ios-close"></span></a>
-                        <a href="#"><span class="ion-ios-more"></span></a>
+                        <a data-toggle="modal"
+                        data-target="#modelId" id=m"${user.id}"><span class="ion-ios-more"></span></a>
                     </td>
                 </tr>`;
     }).join("\n");
@@ -73,3 +74,7 @@ users_table.addEventListener('click', (e) => {
         loadUsersHTML();
     }
 })
+
+//EDIT PLAYER
+
+let saveChanges = () => {}
