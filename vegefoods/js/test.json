@@ -690,6 +690,30 @@
           null
         ]
       ]
+    },
+    {
+      "name": "Quiz",
+      "description": "quiz 2",
+      "url": "",
+      "creator": 1244,
+      "questions": [
+        {
+          "question": "Pregunta 1",
+          "time": "30",
+          "url": "",
+          "answers": [
+            {
+              "answer": "Ests es la pregunta 1",
+              "correct": true
+            },
+            {
+              "answer": "",
+              "correct": false
+            }
+          ]
+        }
+      ],
+      "id": 1002
     }
   ]
 }
