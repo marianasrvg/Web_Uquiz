@@ -505,6 +505,28 @@
       "nickname": "admin",
       "quizz": "1000",
       "id": 1142
+    },
+    {
+      "user": 0,
+      "nickname": "Diego",
+      "quizz": "1000",
+      "id": 1143,
+      "answers": [
+        {
+          "time": 2,
+          "question": "¿Cuál es tu nieve fav?",
+          "answer": "CHOCOLATE",
+          "correct": false
+        },
+        {
+          "time": 1,
+          "question": "¿Qué paleta te gusta más",
+          "answer": "LIMÓN",
+          "correct": true
+        }
+      ],
+      "time": 3,
+      "score": 50
     }
   ],
   "users": [
