@@ -1,10 +1,3 @@
-"use strict";
-localStorage.sessionId;
-localStorage.sessionName;
-localStorage.userId;
-localStorage.isAdmin;
-
-
 let quizz_name = document.querySelector("#quizz-name");
 let quizz_description = document.querySelector("#quizz-description");
 let quizz_image = document.querySelector("#quizz-image");
