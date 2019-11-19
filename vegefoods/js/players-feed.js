@@ -9,7 +9,7 @@ let loadUsers = () => {
     xhr.setRequestHeader('Content-Type', 'application/json');
     xhr.send();
     xhr.onload = () => {
-        if(xhr.status == 200){
+        if (xhr.status == 200) {
             console.log(xhr.response);
             users = JSON.parse(xhr.response);
             loadUsersHTML();
@@ -19,6 +19,7 @@ let loadUsers = () => {
 }
 
 let loadUsersHTML = () => {
+    console.log("loadUsers");
     users_table.innerHTML = "";
     let html = users.map((user) => {
         return `<tr class="text-center">
@@ -36,7 +37,7 @@ let loadUsersHTML = () => {
                         <h3>${user.email}</h3>
                     </td>
                     <td class="product-remove">
-                        <a href="#"><span class="ion-ios-close"></span></a>
+                        <a id="${user.id}" ><span class="ion-ios-close"></span></a>
                         <a href="#"><span class="ion-ios-more"></span></a>
                     </td>
                 </tr>`;
@@ -45,3 +46,30 @@ let loadUsersHTML = () => {
 }
 
 loadUsers();
+
+let btnDelete = document.querySelectorAll('.ion-ios-close');
+
+//DELETE USER 
+let deleteUsers = (id) => {
+    console.log(id);
+   let xhr = new XMLHttpRequest();
+    let endpoint = `http://localhost:3000/users/${id}`;
+    xhr.open('DELETE', endpoint);
+    xhr.setRequestHeader('Content-Type', 'application/json');
+    xhr.send();
+    xhr.onload = () => {
+        if (xhr.status == 200) {
+            console.log(xhr.response);
+        }
+    }
+    return;
+}
+
+//DELETE USER EVENT
+users_table.addEventListener('click', (e) => {
+    if (e.target.id > 0 && e.target.id < 1000000) {
+        console.log(typeof parseInt(e.target.id));
+        deleteUsers(parseInt(e.target.id));
+        loadUsersHTML();
+    }
+})

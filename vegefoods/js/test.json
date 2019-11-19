@@ -595,14 +595,6 @@
       "admin": 1,
       "password": "admin",
       "id": 1244
-    },
-    {
-      "firstName": "Diego",
-      "lastName": "Ascencio",
-      "email": "diego@gmail.com",
-      "admin": 0,
-      "password": "patito2",
-      "id": 1245
     }
   ],
   "quizzes": [
