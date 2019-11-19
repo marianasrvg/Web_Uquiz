@@ -33,6 +33,56 @@
 
 </head>
 <body onload="onLoad()" class="goto-here">
+	<!-- Modal -->
+	<div class="modal fade" id="modelId" tabindex="-1" role="application" aria-labelledby="modelTitleId"
+		aria-hidden="true">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div class="container">
+					<div class="row no-gutter slider-text align-items-center justify-content-center">
+						<h1 class="text-center">Edit User</h1>
+						<div class="modal-body">
+							<form onsubmit="saveChanges()">
+								<div class="p-5">
+									<div class="form-group">
+										<label for="question">First Name</label>
+										<input id="userFirstName" type="text" class="form-control" placeholder="first name"
+											required>
+									</div>
+		
+									<div class="form-group">
+										<label for="question">Last Name</label>
+										<input id="userLastName" type="text" class="form-control" placeholder="last name"
+											required>
+									</div>
+
+									<div class="form-group">
+										<label for="question">Password</label>
+										<input id="userPassword" type="password" class="form-control" placeholder="password"
+											required>
+									</div>
+
+									<br><br>
+									<div class="text-center">
+										<button id="btn-u-save" type="submit" class="btn btn-primary"
+											style="padding: 18px 40px;">Save</button>
+										<span class="mr-3">
+									</div>
+								</div>
+							</form>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!--End modal-->
+
 	<nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar">
 		<div class="container">
 			<a class="navbar-brand" href="index.html">uQuiz</a>
@@ -53,6 +103,12 @@
 						</div>
 					</li>
 					<li class="nav-item"><a href="about.html" class="nav-link">About Us</a></li>
+					<li class="nav-item dropdown" id="adminUser">
+						<a class="nav-link dropdown-toggle" href="players_feed.html" id="dropdown99"
+							data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Admin</a>
+						<div class="dropdown-menu" aria-labelledby="dropdown99">
+							<a class="dropdown-item" href="players_feed.html">Players</a>
+					</li>
 					<li class="nav-item dropdown" id="loginUser">
 						<!--Login-->
 						<!--<a class="nav-link" href="log-in.html">Log In</a>-->
@@ -113,7 +169,7 @@
 										<h3>javier8apar@gmail.com</h3>
 									</td>
 									<td class="product-remove">
-										<a href="#"><span class="ion-ios-close"></span></a>
+										<a href="#" ><span class="ion-ios-close"></span></a>
 										<a href="#"><span class="ion-ios-more"></span></a>
 									</td>
 								</tr><!-- END TR-->
