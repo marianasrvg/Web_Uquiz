@@ -576,7 +576,17 @@
       "user": "1244",
       "nickname": "admin",
       "quizz": "1001",
-      "id": 1147
+      "id": 1147,
+      "answers": [
+        {
+          "time": 2,
+          "question": "YA JALAAAAA",
+          "answer": "DFGFDLSKÑJG",
+          "correct": false
+        }
+      ],
+      "time": 2,
+      "score": 0
     }
   ],
   "users": [
