@@ -527,17 +527,59 @@
       ],
       "time": 3,
       "score": 50
+    },
+    {
+      "user": "1244",
+      "nickname": "admin",
+      "quizz": "1000",
+      "id": 1144,
+      "answers": [
+        {
+          "time": 3,
+          "question": "¿Cuál es tu nieve fav?",
+          "answer": "VAINILLA",
+          "correct": true
+        },
+        {
+          "time": 1,
+          "question": "¿Qué paleta te gusta más",
+          "answer": "VAINILLA",
+          "correct": false
+        }
+      ],
+      "time": 4,
+      "score": 50
+    },
+    {
+      "user": "1244",
+      "nickname": "admin",
+      "quizz": "1001",
+      "id": 1145,
+      "answers": [
+        {
+          "time": 1,
+          "question": "YA JALAAAAA",
+          "answer": "SDGFSDG",
+          "correct": false
+        }
+      ],
+      "time": 1,
+      "score": 0
+    },
+    {
+      "user": "1244",
+      "nickname": "admin",
+      "quizz": "1000",
+      "id": 1146
+    },
+    {
+      "user": "1244",
+      "nickname": "admin",
+      "quizz": "1001",
+      "id": 1147
     }
   ],
   "users": [
-    {
-      "firstName": "Javier",
-      "lastName": "Ochoa",
-      "email": "Javier8apar@gmail.com",
-      "admin": 0,
-      "password": "patito1",
-      "id": 1230
-    },
     {
       "firstName": "admin",
       "lastName": "admin",
@@ -549,9 +591,9 @@
     {
       "firstName": "Diego",
       "lastName": "Ascencio",
-      "email": "diego@gmail.com",
+      "email": "diego@correo.com",
       "admin": 0,
-      "password": "patito2",
+      "password": "diego",
       "id": 1245
     }
   ],
@@ -632,7 +674,38 @@
           ]
         }
       ],
-      "id": 1001
+      "id": 1001,
+      "correct": [
+        [
+          null,
+          null,
+          null
+        ]
+      ]
+    },
+    {
+      "name": "Quiz",
+      "description": "quiz 2",
+      "url": "",
+      "creator": 1244,
+      "questions": [
+        {
+          "question": "Pregunta 1",
+          "time": "30",
+          "url": "",
+          "answers": [
+            {
+              "answer": "Ests es la pregunta 1",
+              "correct": true
+            },
+            {
+              "answer": "",
+              "correct": false
+            }
+          ]
+        }
+      ],
+      "id": 1002
     }
   ]
 }
