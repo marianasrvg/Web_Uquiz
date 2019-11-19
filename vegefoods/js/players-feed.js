@@ -53,7 +53,7 @@ let btnDelete = document.querySelectorAll('.ion-ios-close');
 //DELETE USER 
 let deleteUsers = (id) => {
     console.log(id);
-   let xhr = new XMLHttpRequest();
+    let xhr = new XMLHttpRequest();
     let endpoint = `http://localhost:3000/users/${id}`;
     xhr.open('DELETE', endpoint);
     xhr.setRequestHeader('Content-Type', 'application/json');
@@ -66,15 +66,75 @@ let deleteUsers = (id) => {
     return;
 }
 
+//EDIT USER MODAL ELEMENTS
+let userFirstName = document.querySelector('#userFirstName');
+let userLastName = document.querySelector('#userLastName');
+let userPassword = document.querySelector('#userPassword');
+
+//ID DE USUARIO SELECCIONADO
+let id;
+//USUARIO SELECCIONADO
+let user;
+
+
+//EDIT USER 
+let editUsers = (id) => {
+    console.log("Edit users")
+
+    let xhr = new XMLHttpRequest();
+    let endpoint = `http://localhost:3000/users/${id}`;
+    console.log(endpoint);
+    xhr.open('GET', endpoint);
+    xhr.setRequestHeader('Content-Type', 'application/json');
+    xhr.send();
+    xhr.onload = () => {
+        console.log(xhr.response);
+        if (xhr.status == 200) {
+            user = JSON.parse(xhr.response);
+            console.log(user)
+            userFirstName.value = user.firstName;
+            userLastName.value = user.lastName;
+            userPassword.value = user.password;
+            userEmail = user.email;
+        }
+    }
+
+    return;
+}
+
 //DELETE USER EVENT
 users_table.addEventListener('click', (e) => {
     if (e.target.id > 0 && e.target.id < 1000000) {
         console.log(typeof parseInt(e.target.id));
         deleteUsers(parseInt(e.target.id));
         loadUsersHTML();
+    } else {
+        console.log(e.target.closest('a').id.slice(2, e.target.closest('a').id.length - 1));
+        id = e.target.closest('a').id.slice(2, e.target.closest('a').id.length - 1);
+        editUsers(id);
     }
 })
 
-//EDIT PLAYER
+//EDIT PLAYER 
+let saveChanges = () => {
+    console.log(user);
+    user.firstName = userFirstName.value;
+    user.lastName = userLastName.value;
+    user.email = userEmail;
+    user.password = userPassword.value;
 
-let saveChanges = () => {}
+
+    let xhr = new XMLHttpRequest();
+    let endpoint = `http://localhost:3000/users/${id}`
+
+    xhr.open('PUT', endpoint);
+    xhr.setRequestHeader('Content-Type', 'application/json');
+    xhr.send(JSON.stringify(user));
+    xhr.onload = () => {
+        if (xhr.status == 200) {
+            console.log("Usuario editado");
+        } else {
+            console.log("No se pudo editar el usuario");
+        }
+    }
+}
