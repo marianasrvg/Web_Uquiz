@@ -101,6 +101,7 @@ let createQuizz = (event) => {
     xhr.send(JSON.stringify(quizz));
     xhr.onload = () => {
         console.log(xhr.response);
+        window.location.href = "quizzes_owned.html";
     }
 }
 

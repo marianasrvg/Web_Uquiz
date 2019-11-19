@@ -4,7 +4,7 @@ let quizzesTable = document.querySelector("tbody");
 
 let loadQuizzResults = (cb) => {
     let xhr = new XMLHttpRequest();
-    let endpoint = `http://localhost:3000/quizzresults`
+    let endpoint = `http://localhost:3000/quizzresults?user=${localStorage.userId}`
     xhr.open('GET', endpoint);
     xhr.setRequestHeader('Content-Type', 'application/json');
     xhr.send();

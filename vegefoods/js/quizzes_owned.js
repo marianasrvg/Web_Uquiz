@@ -4,7 +4,7 @@ let quizzes;
 
 function loadQuizzesInfo () {
     let xhr = new XMLHttpRequest();
-    let endpoint = `http://localhost:3000/quizzes`;
+    let endpoint = `http://localhost:3000/quizzes?creator=${localStorage.userId}`;
     xhr.open('GET', endpoint);
     xhr.setRequestHeader('Content-Type', 'application/json');
     xhr.send();
@@ -84,6 +84,7 @@ let verifyUser = () => {
 let quizzDetails = (pin) => {
     //console.log(`Details ${pin}`);
     localStorage.quizzDetails = pin;
+    localStorage.quizzInfo = pin;
     window.location.href = "quizz-info.html";
 }
 
