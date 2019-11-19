@@ -26,6 +26,28 @@ let loadData = () => {
     return;
 }
 
+let loadCSV = () => {
+    if(localStorage.quizzDetails){
+        console.log("entra a funcion");
+        pin = localStorage.quizzInfo = pin;
+        let xhr = new XMLHttpRequest();
+        let endpoint = `http://localhost:3000/quizzresults?quizz=${pin}`;
+        xhr.open('GET', endpoint);
+        xhr.setRequestHeader('Content-Type', 'application/json');
+        xhr.send();
+        xhr.onload = () => {
+            if(xhr.status == 200){
+                console.log("si jala");
+                console.log(xhr.response);
+                //loadHTML();
+            }
+            return;
+        }
+    }
+    localStorage.removeItem("quizzDetails");
+    return;
+}
+
 let loadHTML = () => {
     name.innerText = quizz.name;
     makeAnimationCount();

@@ -595,6 +595,14 @@
       "admin": 0,
       "password": "diego",
       "id": 1245
+    },
+    {
+      "firstName": "dummy",
+      "lastName": "dummy",
+      "email": "dummy@correo.com",
+      "admin": 0,
+      "password": "sep",
+      "id": 1246
     }
   ],
   "quizzes": [
