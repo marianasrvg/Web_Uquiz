@@ -1,0 +1,283 @@
+@url = http://localhost:3000
+@authUser = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJjb3JyZW8iOiJ0M0B0LmNvbSIsInVpZCI6MywiaWF0IjoxNTc1MTc5NTM1LCJleHAiOjE1NzUxODMxMzV9.eavDo40JlQIe5zk5wQdmkO5Ybvt6wL_wXbtgOpSYD40
+
+
+### GUARDAR USUARIO EN LA BASE DE DATOS
+POST  {{url}}/api/users
+Content-Type: application/json
+
+{
+    "firstName":"Javier",
+    "lastName":"Ochoa",
+    "email":"javier@correo.com",
+    "admin":"0",
+    "password":"javipopo"
+}
+
+### OBTENER TODOS LOS USUARIOS
+GET  {{url}}/api/users
+
+### OBTENER USUARIO POR ID
+GET  {{url}}/api/users/1
+
+### MODIFICAR USUARIO
+PUT  {{url}}/api/users/1
+Content-Type: application/json
+//x-user-token: {{authUser}}
+
+{
+    "firstName":"MARIANA",
+    "lastName":"SIERRA",
+    "email":"MARIANA@correo.com",
+    "admin":"1",
+    "password":"JEJEJEJE"
+}
+
+### DELETE USER
+DELETE  {{url}}/api/users/1
+Content-Type: application/json
+//x-user-token: {{authUser}}
+
+### GUARDAR QUIZZ EN LA BASE DE DATOS
+POST  {{url}}/api/quizz
+Content-Type: application/json
+
+{
+      "name": "Prueba",
+      "description": "Descripcion",
+      "url": "",
+      "creator": "",
+      "questions": [
+        {
+          "question": "¿Cuál es tu nieve fav?",
+          "time": 90,
+          "answers": [
+            {
+              "answer": "Vainilla",
+              "correct": true
+            },
+            {
+              "answer": "Chocolate",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "question": "¿Qué paleta te gusta más",
+          "time": 60,
+          "answers": [
+            {
+              "answer": "Limón",
+              "correct": true
+            },
+            {
+              "answer": "Vainilla",
+              "correct": false
+            }
+          ]
+        }
+      ]
+    }
+
+
+### GUARDAR QUIZZ EN LA BASE DE DATOS
+POST  {{url}}/api/quizz
+Content-Type: application/json
+
+ {
+      "name": "Quizz 2",
+      "description": "Esta es la segunda prueba",
+      "url": "",
+      "creator": 1244,
+      "questions": [
+        {
+          "question": "YA JALAAAAA",
+          "time": "30",
+          "url": "",
+          "answers": [
+            {
+              "answer": "dfgfdlskñjg",
+              "correct": false
+            },
+            {
+              "answer": "sdgfsdg",
+              "correct": false
+            },
+            {
+              "answer": "asfsdf",
+              "correct": false
+            }
+          ]
+        }
+      ],
+      "correct": [
+        [
+          null,
+          null,
+          null
+        ]
+      ]
+    }
+
+### OBTENER TODOS LOS QUIZZES
+GET  {{url}}/api/quizz
+
+
+### OBTENER QUIZZ ID
+GET  {{url}}/api/quizz/1001
+
+### MODIFICAR QUIZZ
+PUT  {{url}}/api/quizz/1000
+Content-Type: application/json
+//x-user-token: {{authUser}}
+
+{
+      "name": "Prueba",
+      "description": "Descripcion",
+      "url": "",
+      "creator": "",
+      "bestScore": 100,
+      "worstScore": 30,
+      "played": 60,
+      "questions": [
+        {
+          "question": "¿Cuál es tu nieve fav?",
+          "time": 90,
+          "answers": [
+            {
+              "answer": "Vainilla",
+              "correct": true
+            },
+            {
+              "answer": "Chocolate",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "question": "¿Qué paleta te gusta más",
+          "time": 60,
+          "answers": [
+            {
+              "answer": "Limón",
+              "correct": true
+            },
+            {
+              "answer": "Vainilla",
+              "correct": false
+            }
+          ]
+        }
+      ],
+      "correct": [
+        [
+          "Vainilla",
+          null
+        ],
+        [
+          "Limón",
+          null
+        ]
+      ]
+    }
+
+
+### DELETE QUIZZ
+DELETE  {{url}}/api/quizz/1001
+Content-Type: application/json
+//x-user-token: {{authUser}}
+
+### GUARDAR ReSULTADO EN LA BASE DE DATOS
+POST  {{url}}/api/quizzresults
+Content-Type: application/json
+
+{
+      "quizz": 1000,
+      "user": 1230,
+      "nickname": "MARIANA"
+}
+
+### OBTENER TODOS LOS QUIZZES
+GET  {{url}}/api/quizzresults
+
+### OBTENER QUIZZRESULT POR ID
+GET  {{url}}/api/quizzresults/1
+
+### MODIFICAR QUIZZRESULT
+PUT  {{url}}/api/quizzresults/1
+Content-Type: application/json
+//x-user-token: {{authUser}}
+
+{
+      "quizz": 1000,
+      "user": 1230,
+      "nickname": "Javi",
+      "score": 50,
+      "time": 77,
+      "answers": [
+        {
+          "question": "question number 1",
+          "correct": true,
+          "time": 55,
+          "answer": "A"
+        },
+        {
+          "question": "question number 2",
+          "correct": false,
+          "time": 22,
+          "answer": "B"
+        }
+      ]
+    }
+
+
+
+
+
+
+
+
+
+
+
+###
+POST  {{url}}/api/login
+Content-Type: application/json
+
+{
+    "correo":"t2@t.com",
+    "password":"12345"
+}
+
+### ?nombre=L
+
+GET  {{url}}/api/users?page=0
+x-user-token: {{authUser}}
+
+###
+GET  {{url}}/api/users/t@t.com
+Content-Type: application/json
+x-user-token: {{authUser}}
+###
+PUT  {{url}}/api/users/t2@t.com
+Content-Type: application/json
+x-user-token: {{authUser}}
+
+{
+    "nombre":"L22",
+    "apellido":"G22",
+    "password":"12345",
+    "correo":"t2@t.com",
+    "sexo":"H2",
+    "fecha":"10-10-2012"
+}
+
+###
+DELETE  {{url}}/api/users/test2@test.com
+Content-Type: application/json
+x-user-token: {{authUser}}
+
+###
+GET {{url}}/api/users/t@t.com
+Content-Type: application/json
+x-user-token: {{authUser}}
