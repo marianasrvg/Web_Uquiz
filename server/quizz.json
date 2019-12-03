@@ -1,0 +1,60 @@
+[{
+    "id": 1001,
+    "name": "Prueba",
+    "description": "Descripcion",
+    "creator": 0,
+    "questions": [{
+        "question": "¿Cuál es tu nieve fav?",
+        "time": 90,
+        "answers": [{
+            "answer": "Vainilla",
+            "correct": true
+        }, {
+            "answer": "Chocolate",
+            "correct": false
+        }]
+    }, {
+        "question": "¿Cuál es tu nieve fav?",
+        "time": 90,
+        "answers": [{
+            "answer": "Vainilla",
+            "correct": true
+        }, {
+            "answer": "Chocolate",
+            "correct": false
+        }]
+    }]
+}, {
+    "name": "hello",
+    "description": "Descripcion",
+    "creator": 0,
+    "bestScore": 100,
+    "worstScore": 0,
+    "played": 1,
+    "questions": [{
+        "question": "¿Cuál es tu nieve fav?",
+        "time": 90,
+        "answers": [{
+            "answer": "Vainilla",
+            "correct": true
+        }, {
+            "answer": "Chocolate",
+            "correct": false
+        }]
+    }, {
+        "question": "¿Cuál es tu nieve fav?",
+        "time": 90,
+        "answers": [{
+            "answer": "Vainilla",
+            "correct": true
+        }, {
+            "answer": "Chocolate",
+            "correct": false
+        }]
+    }],
+    "correct": [
+        ["Vainilla", null],
+        ["Chocolate", null]
+    ],
+    "id": 1000
+}]
