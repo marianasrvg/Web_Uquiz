@@ -1,22 +1,7 @@
 const {mongoose} = require('./mongodb-connect')
-const Config = require ('./Config')
+const Config = require ('./ConfigQuizz')
 const conf = require('./config.json')
 //const bcrypt = require('bcryptjs')
-
-/*let questionsSchema = new Schema({ 
-    question: String,
-    time : Number,
-    answers: {
-        type: [answersSchema],
-        default: undefined
-    },
-});
-
-let answersSchema = new Schema({ 
-    answer: String,
-    correct : Boolean,
-});*/
-
 
 let quizzSchema = mongoose.Schema({
     id:{
@@ -68,19 +53,28 @@ let quizzSchema = mongoose.Schema({
             }
         }]
     }
-    /*rol:{
-        type:String,
-        enum: ["ADMIN", "USER"]
-    }*/
 });
 
 //CREACION DE QUIZZ
 quizzSchema.statics.crearQuizz = async function(quizz){
+    /*console.log(quizz)
+    let newQuizz = Quizz(quizz);
+    return await newQuizz.save()*/
+
+    let qid = await Config.crearConfigOrUpdate(quizz)
+    quizz.id = qid;
     //usr.password = bcrypt.hashSync(usr.password, 8)
-    //usr.rol = (uid == 0)? "ADMIN": "USER"
+
     console.log(quizz)
+
     let newQuizz = Quizz(quizz);
     return await newQuizz.save()
+
+}
+
+//OBTENER USUARIOS
+quizzSchema.statics.obtenerUsuarios = function(){
+    return Quizz.findOne({}); 
 }
 
 let Quizz = mongoose.model('Quizzes', quizzSchema);

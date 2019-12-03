@@ -43,7 +43,6 @@ POST  {{url}}/api/quizz
 Content-Type: application/json
 
 {
-      "id": 1000,
       "name": "Prueba",
       "description": "Descripcion",
       "url": "",
@@ -81,10 +80,51 @@ Content-Type: application/json
     }
 
 
+### GUARDAR QUIZZ EN LA BASE DE DATOS
+POST  {{url}}/api/quizz
+Content-Type: application/json
+
+ {
+      "name": "Quizz 2",
+      "description": "Esta es la segunda prueba",
+      "url": "",
+      "creator": 1244,
+      "questions": [
+        {
+          "question": "YA JALAAAAA",
+          "time": "30",
+          "url": "",
+          "answers": [
+            {
+              "answer": "dfgfdlskñjg",
+              "correct": false
+            },
+            {
+              "answer": "sdgfsdg",
+              "correct": false
+            },
+            {
+              "answer": "asfsdf",
+              "correct": false
+            }
+          ]
+        }
+      ],
+      "correct": [
+        [
+          null,
+          null,
+          null
+        ]
+      ]
+    }
+
+### OBTENER TODOS LOS QUIZZES
+GET  {{url}}/api/quizz
 
 
-
-
+### OBTENER QIR ID
+GET  {{url}}/api/quizz/1002
 
 
 

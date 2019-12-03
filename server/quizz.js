@@ -6,9 +6,20 @@ const router = express.Router();
 //const bcrypt = require("bcryptjs")
 
 router.route('/')
+.get( async (req, res) => {
+    try {
+        let docs = [];
+        docs = await Quizz.find({})
+        res.send(docs);
+    } catch (err) {
+        res.status(400).send({
+            error: "ocurrió un error en tu búsqueda",
+            detalle: err
+        });
+    }
+})
 .post(async (req, res) => {
     let {
-        id,
         name,
         description,
         url,
@@ -22,7 +33,6 @@ router.route('/')
     //FALTA VALIDAR CADA ATRIBUTO
 
     let quizz = {
-        id,
         name,
         description,
         url,
@@ -36,7 +46,7 @@ router.route('/')
     let doc = undefined
     try {
         let ndoc = await Quizz.findOne({
-            id
+            name
         })
         if (ndoc) {
             res.status(403).send({
@@ -55,6 +65,30 @@ router.route('/')
         })
     }
 
+})
+
+router.route('/:id')
+.get( async (req, res) => {
+    let id = req.params.id;
+    doc = await Quizz.findOne({
+       // exp: req.exp,
+        id
+    }/*, {
+        _id: 0,
+        id: 1,
+        name: 1,
+        description: 1,
+        email: 1,
+        password: 1,
+        admin: 1
+    }*/)
+    if (doc) {
+        res.send(doc)
+    } else {
+        res.status(404).send({
+            error: "no se encontró el quizz"
+        })
+    }
 })
 
 
