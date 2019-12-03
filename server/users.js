@@ -103,22 +103,55 @@ let tokenValidator = (req,res,next) => {
 
 let adminValidator = (req,res,next) =>{
     let validUser = users.find(e => e.id == req.body.id);
+    let paramID = req.params.id;
     console.log(validUser);
-    if(validUser.id){
+    if(validUser.admin == 1){
         next(); 
     }
     else{
-        res.status(401).send("Permission Denied, user must be admin");
-        return
+        if(paramID == req.body.id){
+            next();
+        }else{
+            res.status(401).send("You can only search your own user or must be admin");
+        }  
     }
 }
 
 
+router.get('/:id',tokenValidator,adminValidator, (req,res)=>{
+    let paramID = req.params.id;
+    res.send(paramID);
+    console.log("YA JALA ADMIN");
+});
 
-router.get('/:id', (req,res)=>{
+router.put('/:id',tokenValidator,(req,res)=>{
+    let paramID = req.params.id;
+    let user = users.find(e => e.id == paramID);
+    const index = users.indexOf(user);
 
-    console.log(req.param.id);
-    console.log("YA JALA");
+    const schemaEdit = {
+        firstName: joi.required(),
+        lastName: joi.required(),
+        email: joi.required(),
+        admin: joi.required(),
+        password: joi.required()
+    }
+
+    let result = joi.validate(req.body,schemaEdit);
+
+    if(result.error){
+        res.status(400).send(`Bad Request,${result.error.details[0].message}`);
+        return
+    }else{
+        users[index].firstName = req.body.firstName;
+        users[index].lastName = req.body.lastName
+        users[index].email = req.body.email;
+        users[index].password = req.body.password;
+        users[index].admin = req.body.admin;
+        fs.writeFileSync('users.json',JSON.stringify(users));
+        res.status(200).send("Ok");
+        return
+    }
 });
 
 module.exports = router;
