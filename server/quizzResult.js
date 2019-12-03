@@ -1,5 +1,5 @@
 const express = require('express');
-const Quizz = require('./models/Quizz')
+const QuizzResults = require('./models/QuizzResults')
 const router = express.Router();
 
 //const {autenticarUser} = require("../middlewares/authUser")
@@ -9,7 +9,7 @@ router.route('/')
 .get( async (req, res) => {
     try {
         let docs = [];
-        docs = await Quizz.find({})
+        docs = await QuizzResults.find({})
         res.send(docs);
     } catch (err) {
         res.status(400).send({
@@ -20,42 +20,23 @@ router.route('/')
 })
 .post(async (req, res) => {
     let {
-        name,
-        description,
-        url,
-        creator,
-        bestScore,
-        worstScore,
-        played,
-        questions
+        user,
+        nickname,
+        quizz
     } = req.body;
 
     //FALTA VALIDAR CADA ATRIBUTO
 
-    let quizz = {
-        name,
-        description,
-        url,
-        creator,
-        bestScore,
-        worstScore,
-        played,
-        questions
+    let quizzR = {
+        user,
+        nickname,
+        quizz
     };
 
     let doc = undefined
     try {
-        let ndoc = await Quizz.findOne({
-            name
-        })
-        if (ndoc) {
-            res.status(403).send({
-                error: "Quizz ya existe"
-            });
-            return
-        }
         console.log(quizz);
-        doc = await Quizz.crearQuizz(quizz);
+        doc = await QuizzResults.crearQuizz(quizzR);
         res.status(201).send()
     } catch (err) {
         console.log(err);
@@ -70,7 +51,7 @@ router.route('/')
 router.route('/:id')
 .get( async (req, res) => {
     let id = req.params.id;
-    doc = await Quizz.findOne({
+    doc = await QuizzResults.findOne({
        // exp: req.exp,
         id
     }/*, {
@@ -92,67 +73,44 @@ router.route('/:id')
 })
 .put(async (req, res) => {
     let id = req.params.id;
-    let {name, description, url, creator, questions,correct} = req.body;
+    let {quizz, user, nickname, score, time,answers} = req.body;
 
-    let quizz = {
-        name,
-        description,
-        url,
-        creator,
-        questions,
-        correct
+    let quizzR = {
+        user,
+        nickname,
+        score,
+        quizz,
+        time,
+        answers
       };
 
 
-    let str="";
-    for (let k in quizz ){
-        if( k!= "correct" && quizz[k]==undefined  )
+    /*let str="";
+    for (let k in quizzR ){
+        if( k!= "correct" && quizzR[k]==undefined  )
             str+="Falta "+k+ ", "    
     }
 
     if(str.length>0){
         res.status(400).send({error:str});
         return
-    }
+    }*/
 
     
-    console.log(quizz);
+    console.log(quizzR);
     let doc = undefined
     try {
-        doc = await Quizz.findOne({
+        doc = await QuizzResults.findOne({
             id
         })
         if (doc) {
             //str.password = (password ="")? doc.password : bcrypt.hashSync(password,8)
             //str.password = (password ="")? doc.password : password
 
-            await doc.editarQuizz(quizz);
+            await doc.editarQuizz(quizzR);
             res.status(200).send()
         } else {
             res.status(404).send("No se encontró quizz")
-        }
-
-    } catch (err) {
-        res.status(400).send({
-            error: "ocurrió un error revisa los datos",
-            detalle: err
-        })
-    }
-})
-.delete(async (req, res) => {
-    let id = req.params.id;
-    let doc = undefined
-    try {
-        doc = await Quizz.findOne({id});
-        if (doc) {
-            await Quizz.findOneAndDelete({id})
-            res.status(200).send({
-                removed: doc.id
-            })
-        } else {
-            res.status(404).send({
-                error: "no se encontró usuario"
-            })
         }
 
     } catch (err) {

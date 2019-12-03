@@ -187,12 +187,48 @@ DELETE  {{url}}/api/quizz/1001
 Content-Type: application/json
 //x-user-token: {{authUser}}
 
+### GUARDAR ReSULTADO EN LA BASE DE DATOS
+POST  {{url}}/api/quizzresults
+Content-Type: application/json
 
+{
+      "quizz": 1000,
+      "user": 1230,
+      "nickname": "MARIANA"
+}
 
+### OBTENER TODOS LOS QUIZZES
+GET  {{url}}/api/quizzresults
 
+### OBTENER QUIZZRESULT POR ID
+GET  {{url}}/api/quizzresults/1
 
+### MODIFICAR QUIZZRESULT
+PUT  {{url}}/api/quizzresults/1
+Content-Type: application/json
+//x-user-token: {{authUser}}
 
-
+{
+      "quizz": 1000,
+      "user": 1230,
+      "nickname": "Javi",
+      "score": 50,
+      "time": 77,
+      "answers": [
+        {
+          "question": "question number 1",
+          "correct": true,
+          "time": 55,
+          "answer": "A"
+        },
+        {
+          "question": "question number 2",
+          "correct": false,
+          "time": 22,
+          "answer": "B"
+        }
+      ]
+    }
 
 
 

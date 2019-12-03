@@ -1,55 +1,45 @@
 const {mongoose} = require('./mongodb-connect')
-const Config = require ('./ConfigQuizz')
+const Config = require ('./ConfigQuizzResult')
 const conf = require('./config.json')
 //const bcrypt = require('bcryptjs')
 
-let quizzSchema = mongoose.Schema({
+let quizzSchemaResult = mongoose.Schema({
     id:{
         type: Number,
         required: true,
         unique: true
     },
-    name: {
+    quizz: {
+        type: Number,
+        required:true
+    },
+    user: {
+        type: Number,
+        required:true
+    },
+    nickname:{
         type:String,
         required:true
     },
-    description:{
-        type:String,
-        required:true
+    score:{
+        type:Number
     },
-    url:{
-        type:String
-    },
-    creator: {
-        type: String,
-    },
-    bestScore:{
+    time: {
         type: Number,
     },
-    worstScore:{
-        type: Number,
-    },
-    played:{
-        type: Number,
-    },
-    questions: {
+    answers: {
         type: [{
             question: String,
+            correct: Boolean,
             time : Number,
-            answers: {
-                type: [{
-                    answer: String,
-                    correct : Boolean
-                }],
-                default: undefined
-            }
+            answer: String
         }],
         default: undefined,
     },
-    correct:{ 
+    /*correct:{ 
         type : Array , 
         "default" : [] }
-        /*type:[{
+        type:[{
             arr : {
                 type:[{answer: String}]
             }
@@ -58,7 +48,7 @@ let quizzSchema = mongoose.Schema({
 });
 
 //CREACION DE QUIZZ
-quizzSchema.statics.crearQuizz = async function(quizz){
+quizzSchemaResult.statics.crearQuizz = async function(quizz){
     /*console.log(quizz)
     let newQuizz = Quizz(quizz);
     return await newQuizz.save()*/
@@ -75,7 +65,7 @@ quizzSchema.statics.crearQuizz = async function(quizz){
 }
 
 //EDITAR USUARIO
-quizzSchema.methods.editarQuizz = function(datos){
+quizzSchemaResult.methods.editarQuizz = function(datos){
     return Quizz.findOneAndUpdate(
                 {_id:this._id},
                 {$set:datos},
@@ -84,7 +74,7 @@ quizzSchema.methods.editarQuizz = function(datos){
     
 }
 
-let Quizz = mongoose.model('Quizzes', quizzSchema);
+let Quizz = mongoose.model('quizzResult', quizzSchemaResult);
 
 module.exports = Quizz;
 
