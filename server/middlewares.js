@@ -3,6 +3,7 @@ const express = require('express');
 const fs = require('fs');
 
 let privateTokenPassword = JSON.parse(fs.readFileSync('passwords.json'));
+let users = JSON.parse(fs.readFileSync('users.json'));
 //---------------------------------------MIDDLEWARES----------------------------------------------------
 //This middleware is used for operations you dont need to be admin but yo 
 //Can only ask for your own ID
