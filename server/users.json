@@ -17,10 +17,10 @@
   },
   {
     "firstName": "dummy",
-    "lastName": "dummy",
+    "lastName": "dummyModified3",
     "email": "dummy@correo.com",
     "admin": 0,
-    "password": "sep",
+    "password": "admin",
     "id": 1246
   },
   {

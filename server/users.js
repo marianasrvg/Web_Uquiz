@@ -10,11 +10,64 @@ let passwords = JSON.parse(fs.readFileSync('passwords.json'));
 
 app.use(express.json());
 
-router.get("/", (req, res) => {
-    //Mostrar todos los usuarios
-    //Middleware token-auth
-    //Middleware isAdmin 
-});
+//---------------------------------------MIDDLEWARES----------------------------------------------------
+let adminValidator = (req,res,next) => {
+    let validUser = users.find(e => e.id == req.body.id);
+    if(validUser.admin == 1){
+        next(); 
+    }
+    else{
+        res.status(401).send("You must be an admin");
+    }    
+}
+
+let tokenValidator = (req,res,next) => {
+
+    const userToken = req.header('x-auth-user');
+    
+    if(!userToken){
+        res.status(401).send('session token not found');
+        return
+    }
+
+
+    let userPassword = passwords.password;
+
+    jwt.verify(userToken, userPassword,(err,decoded)=>{
+        if(err){
+            if(err.name == 'TokenExpiredError'){
+                res.status(403).send("token has expired");
+                return
+            }else{
+                res.status(401).send("invalid token");
+                return
+            }
+        }
+        req.body.id = decoded.id;
+        //let decoded2 = jwt.decode(userToken,{complete:true});
+        //req.body.id = decoded.id;
+    });
+
+    next();
+}
+
+let adminParamValidator = (req,res,next) =>{
+    let validUser = users.find(e => e.id == req.body.id);
+    let paramID = req.params.id;
+    console.log(validUser);
+    if(validUser.admin == 1){
+        next(); 
+    }
+    else{
+        if(paramID == req.body.id){
+            next();
+        }else{
+            res.status(401).send("You can only search your own user or must be admin");
+        }  
+    }
+}
+
+//---------------------------------------API-------------------------------------------------------------
 
 router.post('/',(req, res)=>{
     const schemaSignUp = {
@@ -52,79 +105,20 @@ router.post('/',(req, res)=>{
     }
 });
 
-
-//---------------------------------------MIDDLEWARES----------------------------------------------------
-let userValidator = (req,res,next) => {
-
-
-    let idParam = req.param.id;
-    let user = users.find(e => e.id == idParam);
-    console.log(idParam);
-    console.log(user.id);
-    
-    if(user.id == req.body.id){
-        next();
-    }else{
-        res.status(401).send("Permission Denied, you must be an admin to see other users");
-        return
-    }
-    
-}
-
-let tokenValidator = (req,res,next) => {
-
-    const userToken = req.header('x-auth-user');
-    
-    if(!userToken){
-        res.status(401).send('session token not found');
-        return
-    }
-
-
-    let userPassword = passwords.password;
-
-    jwt.verify(userToken, userPassword,(err,decoded)=>{
-        if(err){
-            if(err.name == 'TokenExpiredError'){
-                res.status(403).send("token has expired");
-                return
-            }else{
-                res.status(401).send("invalid token");
-                return
-            }
-        }
-        req.body.id = decoded.id;
-        //let decoded2 = jwt.decode(userToken,{complete:true});
-        //req.body.id = decoded.id;
-    });
-
-    next();
-}
-
-let adminValidator = (req,res,next) =>{
-    let validUser = users.find(e => e.id == req.body.id);
+router.get('/:id',tokenValidator,adminParamValidator, (req,res)=>{
     let paramID = req.params.id;
-    console.log(validUser);
-    if(validUser.admin == 1){
-        next(); 
-    }
-    else{
-        if(paramID == req.body.id){
-            next();
-        }else{
-            res.status(401).send("You can only search your own user or must be admin");
-        }  
-    }
-}
-
-
-router.get('/:id',tokenValidator,adminValidator, (req,res)=>{
-    let paramID = req.params.id;
-    res.send(paramID);
-    console.log("YA JALA ADMIN");
+    let user = users.find(e => e.id == paramID);
+    res.send(user).status(200);
+    return
 });
 
-router.put('/:id',tokenValidator,(req,res)=>{
+router.get("/",tokenValidator,adminValidator, (req, res) => {
+    //Mostrar todos los usuarios
+    res.send(users);
+    return
+});
+
+router.put('/:id',tokenValidator,adminParamValidator,(req,res)=>{
     let paramID = req.params.id;
     let user = users.find(e => e.id == paramID);
     const index = users.indexOf(user);
@@ -134,9 +128,9 @@ router.put('/:id',tokenValidator,(req,res)=>{
         lastName: joi.required(),
         email: joi.required(),
         admin: joi.required(),
-        password: joi.required()
+        password: joi.required(),
+        id: joi.optional(),
     }
-
     let result = joi.validate(req.body,schemaEdit);
 
     if(result.error){
@@ -150,6 +144,21 @@ router.put('/:id',tokenValidator,(req,res)=>{
         users[index].admin = req.body.admin;
         fs.writeFileSync('users.json',JSON.stringify(users));
         res.status(200).send("Ok");
+        return
+    }
+});
+
+router.delete('/:id',tokenValidator,adminValidator,(req,res)=>{
+    let paramID = req.params.id;
+    let user = users.find(e => e.id == paramID);
+    const index = users.indexOf(user);
+    if(user){
+        users.splice(index,1);
+        res.status(201).send(`user deleted ${JSON.stringify(user)}`);
+        fs.writeFileSync('users.json',JSON.stringify(users));
+        return
+    }else{
+        res.status(404).send("User not found");
         return
     }
 });
