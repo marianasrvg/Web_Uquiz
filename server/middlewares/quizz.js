@@ -3,7 +3,7 @@ const router = express.Router();
 const fs = require('fs');
 const joi = require('joi');
 const jwt = require('jsonwebtoken');
-const middlewares = require('./middlewares');
+const middlewares = require('../middlewares');
 
 const quizzes = JSON.parse(fs.readFileSync('quizz.json'));
 

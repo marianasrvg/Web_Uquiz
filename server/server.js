@@ -3,7 +3,7 @@ const login = require('./login');
 const users = require('./users');
 const quizz = require('./quizz');
 //API
-const quizzresults = require("./quizzresults");
+//const quizzresults = require("./middlewares/quizzresults");
 
 //MongoDB
 const quizzResult = require('./quizzResult');

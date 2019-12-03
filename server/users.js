@@ -1,161 +1,156 @@
 const express = require('express');
-const User = require('../server/models/User')
 const router = express.Router();
-
-//const {autenticarUser} = require("../middlewares/authUser")
-//const bcrypt = require("bcryptjs")
+const joi = require('joi');
+const User = require('../server/models/User');
+const middlewares = require('./middlewares');
 
 router.route('/')
-.get( async (req, res) => {
-    try {
-        let docs = [];
-        docs = await User.find({})
-        res.send(docs);
-    } catch (err) {
-        res.status(400).send({
-            error: "ocurrió un error en tu búsqueda",
-            detalle: err
-        });
-    }
-
-})
-.post(async (req, res) => {
-    let {
-        firstName,
-        lastName,
-        email,
-        password,
-        admin
-    } = req.body;
-
-    //FALTA VALIDAR CADA ATRIBUTO
-
-    let usr = {
-        firstName,
-        lastName,
-        email,
-        password,
-        admin
-    };
-
-    let doc = undefined
-    try {
-        let ndoc = await User.findOne({
-            email
-        })
-        if (ndoc) {
-            res.status(403).send({
-                error: "usuario ya existe"
+    .get(middlewares.tokenValidator, middlewares.adminValidator, async (req, res) => {
+        try {
+            let docs = [];
+            docs = await User.find({})
+            res.send(docs);
+        } catch (err) {
+            res.status(400).send({
+                error: "ocurrió un error en tu búsqueda",
+                detalle: err
             });
-            return
         }
-        console.log(usr);
-        doc = await User.crearUsuario(usr);
-        res.status(201).send()
-    } catch (err) {
-        console.log(err);
-        res.status(400).send({
-            error: "ocurrió un error revisa los datos",
-            detalle: err
-        })
-    }
 
-})
+    })
+    .post(async (req, res) => {
+        const schemaSignUp = {
+            firstName: joi.required(),
+            lastName: joi.required(),
+            email: joi.required(),
+            password: joi.required(),
+            admin: joi.required(),
+        }
+
+        let result = joi.validate(req.body, schemaSignUp);
+
+        if (result.error) {
+            res.status(400).send(`Bad Request,${result.error.details[0].message}`);
+            return;
+        }
+        const user = {
+            firstName: req.body.firstName,
+            lastName: req.body.lastName,
+            email: req.body.email,
+            admin: req.body.admin,
+            password: req.body.password
+        };
+
+        let doc = undefined
+
+        try {
+            let ndoc = await User.findOne({
+                email: user.email
+            });
+            if (ndoc) {
+                res.status(400).send("Email already registered");
+                return
+            }
+            doc = await User.crearUsuario(user);
+            res.status(201).send()
+        } catch (err) {
+            console.log(err);
+            res.status(400).send({
+                error: "Database error",
+                detalle: err
+            })
+        }
+    })
 
 
 router.route('/:id')
-.get( async (req, res) => {
-    let id = req.params.id;
-    doc = await User.findOne({
-       // exp: req.exp,
-        id
-    }, {
-        _id: 0,
-        id: 1,
-        firstName: 1,
-        lastName: 1,
-        email: 1,
-        password: 1,
-        admin: 1
-    })
-    if (doc) {
-        res.send(doc)
-    } else {
-        res.status(404).send({
-            error: "no se encontró al usuario"
-        })
-    }
-})
-.put(async (req, res) => {
-    let id = req.params.id;
-    let {firstName, lastName, email, password, admin} = req.body;
-
-    let usr = {
-        firstName,
-        lastName,
-        email,
-        password,
-        admin,
-      };
-
-    
-    let str="";
-    for (let k in usr ){
-        if( k!= "url" && usr[k]==undefined)
-            str+="Falta "+k+ ", "    
-    }
-
-    if(str.length>0){
-        res.status(400).send({error:str});
-        return
-    }
-
-    
-    console.log(usr);
-    let doc = undefined
-    try {
+    .get(middlewares.tokenValidator, middlewares.permissionValidator, async (req, res) => {
+        let id = req.params.id;
         doc = await User.findOne({
             id
+        }, {
+            _id: 0,
+            id: 1,
+            firstName: 1,
+            lastName: 1,
+            email: 1,
+            password: 1,
+            admin: 1
         })
         if (doc) {
-            //str.password = (password ="")? doc.password : bcrypt.hashSync(password,8)
-            str.password = (password ="")? doc.password : password
-
-            await doc.editarUsuario(usr);
-            res.status(200).send()
-        } else {
-            res.status(404).send("No se encontró usuario")
-        }
-
-    } catch (err) {
-        res.status(400).send({
-            error: "ocurrió un error revisa los datos",
-            detalle: err
-        })
-    }
-})
-.delete(async (req, res) => {
-    let id = req.params.id;
-    let doc = undefined
-    try {
-        doc = await User.findOne({id});
-        if (doc) {
-            await User.findOneAndDelete({id})
-            res.status(200).send({
-                removed: doc.id
-            })
+            res.send(doc)
         } else {
             res.status(404).send({
-                error: "no se encontró usuario"
+                error: "User not found"
             })
         }
+    })
+    .put(middlewares.tokenValidator, middlewares.permissionValidator, async (req, res) => {
+        let id = req.params.id;
 
-    } catch (err) {
-        res.status(400).send({
-            error: "ocurrió un error revisa los datos",
-            detalle: err
-        })
-    }
-})
+        const schemaEdit = {
+            firstName: joi.required(),
+            lastName: joi.required(),
+            email: joi.required(),
+            admin: joi.required(),
+            password: joi.required(),
+            id: joi.optional(),
+        }
+        let result = joi.validate(req.body, schemaEdit);
+
+        if (result.error) {
+            res.status(400).send(`Bad Request,${result.error.details[0].message}`);
+            return
+        }
+
+        console.log(result.value);
+        let doc = undefined
+        try {
+            doc = await User.findOne({
+                id
+            })
+            if (doc) {
+                await doc.editarUsuario(result.value);
+                res.status(200).send()
+            } else {
+                res.status(404).send("User not found")
+            }
+
+        } catch (err) {
+            console.log(err);
+            res.status(400).send({
+                error: "Database error",
+                detalle: err
+            })
+        }
+    })
+    .delete(middlewares.tokenValidator,middlewares.adminValidator, async (req, res) => {
+        let id = req.params.id;
+        let doc = undefined
+        try {
+            doc = await User.findOne({
+                id
+            });
+            if (doc) {
+                await User.findOneAndDelete({
+                    id
+                })
+                res.status(200).send({
+                    removed: doc.id
+                })
+            } else {
+                res.status(404).send({
+                    error: "User not found"
+                })
+            }
+
+        } catch (err) {
+            console.log(err);
+            res.status(400).send({
+                error: "Database error",
+                detalle: err
+            })
+        }
+    })
 
 module.exports = router;

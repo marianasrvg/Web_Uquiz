@@ -1,29 +1,50 @@
 @url = http://localhost:3000
 @authUser = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJjb3JyZW8iOiJ0M0B0LmNvbSIsInVpZCI6MywiaWF0IjoxNTc1MTc5NTM1LCJleHAiOjE1NzUxODMxMzV9.eavDo40JlQIe5zk5wQdmkO5Ybvt6wL_wXbtgOpSYD40
 
+### LOGIN
+POST {{url}}/api/login
+Content-Type: application/json
+
+{
+  "email":"admin@correo.com",
+  "password":"admin"
+}
+
+### JAVI LOGIN
+POST {{url}}/api/login
+Content-Type: application/json
+
+{
+  "email":"javier@correo.com",
+  "password":"javipopo"
+}
 
 ### GUARDAR USUARIO EN LA BASE DE DATOS
 POST  {{url}}/api/users
 Content-Type: application/json
 
 {
-    "firstName":"Javier",
+    "firstName":"Admin",
     "lastName":"Ochoa",
-    "email":"javier@correo.com",
-    "admin":"0",
-    "password":"javipopo"
+    "email":"admin@correo.com",
+    "admin":"1",
+    "password":"admin"
 }
 
 ### OBTENER TODOS LOS USUARIOS
 GET  {{url}}/api/users
+Content-Type: application/json
+x-auth-user: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImphdmllckBjb3JyZW8uY29tIiwiaWQiOjMsImlhdCI6MTU3NTQxMTMyNSwiZXhwIjoxNTc1NDMyOTI1fQ.r4PjLoJQ3621Dmstvq2TE7xd3F0XmPUaUWM1BS8LakI
 
 ### OBTENER USUARIO POR ID
-GET  {{url}}/api/users/1
+GET  {{url}}/api/users/3
+Content-Type: application/json
+x-auth-user: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImphdmllckBjb3JyZW8uY29tIiwiaWQiOjMsImlhdCI6MTU3NTQxMTMyNSwiZXhwIjoxNTc1NDMyOTI1fQ.r4PjLoJQ3621Dmstvq2TE7xd3F0XmPUaUWM1BS8LakI
 
 ### MODIFICAR USUARIO
-PUT  {{url}}/api/users/1
+PUT  {{url}}/api/users/3
 Content-Type: application/json
-//x-user-token: {{authUser}}
+x-auth-user: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImphdmllckBjb3JyZW8uY29tIiwiaWQiOjMsImlhdCI6MTU3NTQxMTMyNSwiZXhwIjoxNTc1NDMyOTI1fQ.r4PjLoJQ3621Dmstvq2TE7xd3F0XmPUaUWM1BS8LakI
 
 {
     "firstName":"MARIANA",
@@ -34,9 +55,10 @@ Content-Type: application/json
 }
 
 ### DELETE USER
-DELETE  {{url}}/api/users/1
+DELETE  {{url}}/api/users/3
 Content-Type: application/json
-//x-user-token: {{authUser}}
+x-auth-user: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImphdmllckBjb3JyZW8uY29tIiwiaWQiOjMsImlhdCI6MTU3NTQxMTMyNSwiZXhwIjoxNTc1NDMyOTI1fQ.r4PjLoJQ3621Dmstvq2TE7xd3F0XmPUaUWM1BS8LakI
+
 
 ### GUARDAR QUIZZ EN LA BASE DE DATOS
 POST  {{url}}/api/quizz

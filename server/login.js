@@ -3,15 +3,16 @@ const router = express.Router();
 const joi = require('joi');
 const jwt = require('jsonwebtoken');
 const fs = require('fs');
+const User = require('../server/models/User')
 
-let users = JSON.parse(fs.readFileSync('users.json'));
+//let users = JSON.parse(fs.readFileSync('users.json'));
 let passwords = JSON.parse(fs.readFileSync('passwords.json'));
 
 router.get("/", (req, res) => {
     res.send("Web Uquizz login");
 });
 
-router.post("/",(req,res) => {
+router.post("/", async (req,res) => {
 
     //Validation schema
     const schemaLogin = {
@@ -29,6 +30,45 @@ router.post("/",(req,res) => {
     }
 
     //if its correct, find a user to fetch from database matching account
+    let doc = undefined
+
+    try {
+        let ndoc = await User.findOne(
+            {
+                email: req.body.email,
+                password: req.body.password
+            });
+        if (ndoc) {
+            let resBody = {};
+            let privatePassword = "securePassword";
+            //When a valid user is found, sign a token and send it back
+            let token = jwt.sign(
+                {
+                    email:req.body.email, 
+                    id:ndoc.id
+                },privatePassword,
+                {
+                    expiresIn:60*60*6
+                });
+    
+            resBody.token = token;
+            resBody.firsName = ndoc.firstName;
+            resBody.id = ndoc.id;
+            resBody.admin = ndoc.admin;
+            passwords.password = privatePassword;
+            fs.writeFileSync('passwords.json',JSON.stringify(passwords));
+            res.status(200).send(resBody);
+        } else {
+            res.status(400).send("Invalid credentials");
+        }
+    } catch (err) {
+        console.log(err);
+        res.status(400).send({
+            error: "Database error",
+            detalle: err
+        })
+    }
+/*
     const validUser = users.find( e => e.email === req.body.email &&  e.password === req.body.password);
 
     if(!(validUser)){
@@ -49,7 +89,7 @@ router.post("/",(req,res) => {
         passwords.password = privatePassword;
         fs.writeFileSync('passwords.json',JSON.stringify(passwords));
         res.status(200).send(resBody);
-    }
+    }*/
 });
 
 
