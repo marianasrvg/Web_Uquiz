@@ -1,0 +1,84 @@
+@url = http://localhost:3000
+@authUser = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJjb3JyZW8iOiJ0M0B0LmNvbSIsInVpZCI6MywiaWF0IjoxNTc1MTc5NTM1LCJleHAiOjE1NzUxODMxMzV9.eavDo40JlQIe5zk5wQdmkO5Ybvt6wL_wXbtgOpSYD40
+
+
+### GUARDAR USUARIO EN LA BASE DE DATOS
+POST  {{url}}/api/users
+Content-Type: application/json
+
+{
+    "firstName":"Javier",
+    "lastName":"Ochoa",
+    "email":"javier@correo.com",
+    "admin":"0",
+    "password":"javipopo"
+}
+
+### OBTENER TODOS LOS USUARIOS
+GET  {{url}}/api/users
+
+### OBTENER USUARIO POR ID
+GET  {{url}}/api/users/1
+
+### MODIFICAR USUARIO
+PUT  {{url}}/api/users/1
+Content-Type: application/json
+//x-user-token: {{authUser}}
+
+{
+    "firstName":"MARIANA",
+    "lastName":"SIERRA",
+    "email":"MARIANA@correo.com",
+    "admin":"1",
+    "password":"JEJEJEJE"
+}
+
+
+
+
+
+
+
+
+
+###
+POST  {{url}}/api/login
+Content-Type: application/json
+
+{
+    "correo":"t2@t.com",
+    "password":"12345"
+}
+
+### ?nombre=L
+
+GET  {{url}}/api/users?page=0
+x-user-token: {{authUser}}
+
+###
+GET  {{url}}/api/users/t@t.com
+Content-Type: application/json
+x-user-token: {{authUser}}
+###
+PUT  {{url}}/api/users/t2@t.com
+Content-Type: application/json
+x-user-token: {{authUser}}
+
+{
+    "nombre":"L22",
+    "apellido":"G22",
+    "password":"12345",
+    "correo":"t2@t.com",
+    "sexo":"H2",
+    "fecha":"10-10-2012"
+}
+
+###
+DELETE  {{url}}/api/users/test2@test.com
+Content-Type: application/json
+x-user-token: {{authUser}}
+
+###
+GET {{url}}/api/users/t@t.com
+Content-Type: application/json
+x-user-token: {{authUser}}
