@@ -1,4 +1,5 @@
 [{
+    "id": 1001,
     "name": "Prueba",
     "description": "Descripcion",
     "creator": 0,
@@ -24,9 +25,12 @@
         }]
     }]
 }, {
-    "name": "Prueba1",
+    "name": "hello",
     "description": "Descripcion",
     "creator": 0,
+    "bestScore": 100,
+    "worstScore": 0,
+    "played": 1,
     "questions": [{
         "question": "¿Cuál es tu nieve fav?",
         "time": 90,
@@ -47,5 +51,10 @@
             "answer": "Chocolate",
             "correct": false
         }]
-    }]
+    }],
+    "correct": [
+        ["Vainilla", null],
+        ["Chocolate", null]
+    ],
+    "id": 1000
 }]
