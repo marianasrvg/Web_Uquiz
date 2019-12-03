@@ -38,6 +38,56 @@ DELETE  {{url}}/api/users/1
 Content-Type: application/json
 //x-user-token: {{authUser}}
 
+### GUARDAR QUIZZ EN LA BASE DE DATOS
+POST  {{url}}/api/quizz
+Content-Type: application/json
+
+{
+      "id": 1000,
+      "name": "Prueba",
+      "description": "Descripcion",
+      "url": "",
+      "creator": "",
+      "questions": [
+        {
+          "question": "¿Cuál es tu nieve fav?",
+          "time": 90,
+          "answers": [
+            {
+              "answer": "Vainilla",
+              "correct": true
+            },
+            {
+              "answer": "Chocolate",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "question": "¿Qué paleta te gusta más",
+          "time": 60,
+          "answers": [
+            {
+              "answer": "Limón",
+              "correct": true
+            },
+            {
+              "answer": "Vainilla",
+              "correct": false
+            }
+          ]
+        }
+      ]
+    }
+
+
+
+
+
+
+
+
+
 
 
 
