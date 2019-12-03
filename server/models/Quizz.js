@@ -46,13 +46,15 @@ let quizzSchema = mongoose.Schema({
         }],
         default: undefined,
     },
-    correct:{
-        type:[{
+    correct:{ 
+        type : Array , 
+        "default" : [] }
+        /*type:[{
             arr : {
                 type:[{answer: String}]
             }
         }]
-    }
+    }*/
 });
 
 //CREACION DE QUIZZ
@@ -75,6 +77,16 @@ quizzSchema.statics.crearQuizz = async function(quizz){
 //OBTENER USUARIOS
 quizzSchema.statics.obtenerUsuarios = function(){
     return Quizz.findOne({}); 
+}
+
+//EDITAR USUARIO
+quizzSchema.methods.editarQuizz = function(datos){
+    return Quizz.findOneAndUpdate(
+                {_id:this._id},
+                {$set:datos},
+                {new: true}
+                );
+    
 }
 
 let Quizz = mongoose.model('Quizzes', quizzSchema);

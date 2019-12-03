@@ -123,8 +123,78 @@ Content-Type: application/json
 GET  {{url}}/api/quizz
 
 
-### OBTENER QIR ID
-GET  {{url}}/api/quizz/1002
+### OBTENER QUIZZ ID
+GET  {{url}}/api/quizz/1001
+
+### MODIFICAR QUIZZ
+PUT  {{url}}/api/quizz/1000
+Content-Type: application/json
+//x-user-token: {{authUser}}
+
+{
+      "name": "Prueba",
+      "description": "Descripcion",
+      "url": "",
+      "creator": "",
+      "bestScore": 100,
+      "worstScore": 30,
+      "played": 60,
+      "questions": [
+        {
+          "question": "¿Cuál es tu nieve fav?",
+          "time": 90,
+          "answers": [
+            {
+              "answer": "Vainilla",
+              "correct": true
+            },
+            {
+              "answer": "Chocolate",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "question": "¿Qué paleta te gusta más",
+          "time": 60,
+          "answers": [
+            {
+              "answer": "Limón",
+              "correct": true
+            },
+            {
+              "answer": "Vainilla",
+              "correct": false
+            }
+          ]
+        }
+      ],
+      "correct": [
+        [
+          "Vainilla",
+          null
+        ],
+        [
+          "Limón",
+          null
+        ]
+      ]
+    }
+
+
+### DELETE QUIZZ
+DELETE  {{url}}/api/quizz/1001
+Content-Type: application/json
+//x-user-token: {{authUser}}
+
+
+
+
+
+
+
+
+
 
 
 

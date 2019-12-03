@@ -90,6 +90,79 @@ router.route('/:id')
         })
     }
 })
+.put(async (req, res) => {
+    let id = req.params.id;
+    let {name, description, url, creator, questions,correct} = req.body;
 
+    let quizz = {
+        name,
+        description,
+        url,
+        creator,
+        questions,
+        correct
+      };
+
+
+    let str="";
+    for (let k in quizz ){
+        if( k!= "correct" && quizz[k]==undefined  )
+            str+="Falta "+k+ ", "    
+    }
+
+    if(str.length>0){
+        res.status(400).send({error:str});
+        return
+    }
+
+    
+    //console.log(quizz);
+    let doc = undefined
+    try {
+        console.log("try")
+        doc = await Quizz.findOne({
+            id
+        })
+        if (doc) {
+            console.log(doc)
+            //str.password = (password ="")? doc.password : bcrypt.hashSync(password,8)
+            //str.password = (password ="")? doc.password : password
+
+            await doc.editarQuizz(quizz);
+            res.status(200).send()
+        } else {
+            res.status(404).send("No se encontró quizz")
+        }
+
+    } catch (err) {
+        res.status(400).send({
+            error: "ocurrió un error revisa los datos",
+            detalle: err
+        })
+    }
+})
+.delete(async (req, res) => {
+    let id = req.params.id;
+    let doc = undefined
+    try {
+        doc = await Quizz.findOne({id});
+        if (doc) {
+            await Quizz.findOneAndDelete({id})
+            res.status(200).send({
+                removed: doc.id
+            })
+        } else {
+            res.status(404).send({
+                error: "no se encontró usuario"
+            })
+        }
+
+    } catch (err) {
+        res.status(400).send({
+            error: "ocurrió un error revisa los datos",
+            detalle: err
+        })
+    }
+})
 
 module.exports = router;
