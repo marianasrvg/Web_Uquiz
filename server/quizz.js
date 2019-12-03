@@ -3,10 +3,11 @@ const router = express.Router();
 const fs = require('fs');
 const joi = require('joi');
 const jwt = require('jsonwebtoken');
+const middlewares = require('./middlewares');
 
 const quizzes = JSON.parse(fs.readFileSync('quizz.json'));
 
-router.post("/", (req, res) => {
+router.post("/", middlewares.tokenValidator, (req, res) => {
 
     //VERIFICAR USER
 
@@ -22,7 +23,9 @@ router.post("/", (req, res) => {
                 answer: joi.required(),
                 correct: joi.required()
             }))
-        }))
+        })),
+        //ESTE ID es el del usuario que viene del middleware
+        id: joi.required()
     }
 
     let quizz = joi.validate(req.body, schemaQuizz);
@@ -30,13 +33,14 @@ router.post("/", (req, res) => {
     if(quizz.error){
         res.status(400).send(`Bad request ${quizz.error.details[0].message}`);
         return;
-    } 
+    }
+    delete quizz.value.id;
     quizzes.push(quizz.value);
     fs.writeFileSync('quizz.json',JSON.stringify(quizzes));
     res.status(201).send();
 });
 
-router.get("/", (req, res) => {
+router.get("/", middlewares.tokenValidator, middlewares.adminValidator, (req, res) => {
     //VERIFICAR USER
     // ADMIN
 
@@ -54,7 +58,7 @@ router.get("/", (req, res) => {
     res.status(200).send(result);
 });
 
-router.get("/:pin", (req, res) => {
+router.get("/:pin", middlewares.tokenValidator, (req, res) => {
     //VERIFICAR USUARIO
     let quizz = quizzes.find(q => q.id == req.params.pin);
     if(quizz == undefined){
@@ -63,7 +67,7 @@ router.get("/:pin", (req, res) => {
     res.status(200).send(quizz);
 });
 
-router.put("/:pin", (req, res) => {
+router.put("/:pin", middlewares.tokenValidator, (req, res) => {
     //VERIFICAR USUARIO
     let pin = req.params.pin;
     console.log("Hello"+ pin);
@@ -111,7 +115,7 @@ router.put("/:pin", (req, res) => {
     res.status(201).send();
 });
 
-router.delete("/:pin", (req, res) => {
+router.delete("/:pin", middlewares.tokenValidator, middlewares.adminValidator, (req, res) => {
     let quizzIndex = quizzes.findIndex(q => q.id == req.params.pin);
     
     if(quizzIndex == -1){
