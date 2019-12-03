@@ -33,7 +33,10 @@ Content-Type: application/json
     "password":"JEJEJEJE"
 }
 
-
+### DELETE USER
+DELETE  {{url}}/api/users/1
+Content-Type: application/json
+//x-user-token: {{authUser}}
 
 
 

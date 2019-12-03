@@ -134,5 +134,28 @@ router.route('/:id')
         })
     }
 })
+.delete(async (req, res) => {
+    let id = req.params.id;
+    let doc = undefined
+    try {
+        doc = await User.findOne({id});
+        if (doc) {
+            await User.findOneAndDelete({id})
+            res.status(200).send({
+                removed: doc.id
+            })
+        } else {
+            res.status(404).send({
+                error: "no se encontró usuario"
+            })
+        }
+
+    } catch (err) {
+        res.status(400).send({
+            error: "ocurrió un error revisa los datos",
+            detalle: err
+        })
+    }
+})
 
 module.exports = router;
