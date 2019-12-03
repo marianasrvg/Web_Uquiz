@@ -1,0 +1,33 @@
+[
+  {
+    "firstName": "admin",
+    "lastName": "admin",
+    "email": "admin@correo.com",
+    "admin": 1,
+    "password": "admin",
+    "id": 1244
+  },
+  {
+    "firstName": "Diego",
+    "lastName": "Ascencio",
+    "email": "diego@correo.com",
+    "admin": 0,
+    "password": "diego",
+    "id": 1245
+  },
+  {
+    "firstName": "dummy",
+    "lastName": "dummyModified3",
+    "email": "dummy@correo.com",
+    "admin": 0,
+    "password": "admin",
+    "id": 1246
+  },
+  {
+    "firstName": "dummy",
+    "lastName": "Token",
+    "email": "test@mail.com",
+    "admin": 0,
+    "password": "dummy"
+  }
+]
