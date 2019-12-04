@@ -110,6 +110,7 @@ router.route('/:id')
             correct
         };*/
         const schemaQuizz = {
+            _id: joi.optional(),
             name: joi.required(),
             description: joi.required(),
             url: joi.optional(),
@@ -118,19 +119,23 @@ router.route('/:id')
             worstScore: joi.optional(),
             played: joi.optional(),
             questions: joi.array().items(joi.object({
+                _id: joi.optional(),
                 question: joi.required(),
                 time: joi.optional(),
                 url: joi.optional(),
                 answers: joi.array().items(joi.object({
+                    _id: joi.optional(),
                     answer: joi.required(),
                     correct: joi.required()
                 }))
             })),
             correct: joi.array().items(
                 joi.array().optional()
-            ).optional()
+            ).optional(),
+            id: joi.optional(),
+            __v: joi.optional(),
         }
-
+        // console.log(req.body);
         let quizz = joi.validate(req.body, schemaQuizz);
 
         if (quizz.error) {
@@ -143,13 +148,13 @@ router.route('/:id')
             doc = await Quizz.findOne({
                 id
             })
+            // console.log(doc);
             if (doc) {
                 await doc.editarQuizz(quizz.value);
                 res.status(200).send()
             } else {
                 res.status(404).send("Quizz not found")
             }
-
         } catch (err) {
             console.log(err);
             res.status(400).send({

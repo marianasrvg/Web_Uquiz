@@ -142,14 +142,14 @@ x-auth-user: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFkbWluQGNvcnJlby
 
 
 ### OBTENER QUIZZ ID
-GET  {{url}}/api/quizz/1006
-x-auth-user: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFkbWluQGNvcnJlby5jb20iLCJpZCI6NCwiaWF0IjoxNTc1NDIwODY0LCJleHAiOjE1NzU0NDI0NjR9.wD1ryJTlfwaT35_TYIKpA2VEEMAkSKGTXoUOsAKQ7rY
+GET  {{url}}/api/quizz/1001
+x-auth-user: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFkbWluQGNvcnJlby5jb20iLCJpZCI6NiwiaWF0IjoxNTc1NDk1ODQzLCJleHAiOjE1NzU1MTc0NDN9.rPvsd_oHhfL3b12lE-47Mko7r-YLDiRmdxCao8no4ZU
 
 
 ### MODIFICAR QUIZZ
-PUT  {{url}}/api/quizz/1000
+PUT  {{url}}/api/quizz/1009
 Content-Type: application/json
-x-auth-user: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFkbWluQGNvcnJlby5jb20iLCJpZCI6MCwiaWF0IjoxNTc1NDg3MDYxLCJleHAiOjE1NzU1MDg2NjF9.0Xlix3jHkT378iX_85ISnnWOj-m-OnHr28VrWK68Vio
+x-auth-user: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFkbWluQGNvcnJlby5jb20iLCJpZCI6NiwiaWF0IjoxNTc1NDk1ODQzLCJleHAiOjE1NzU1MTc0NDN9.rPvsd_oHhfL3b12lE-47Mko7r-YLDiRmdxCao8no4ZU
 
 {
       "name": "Test modificado",
@@ -213,32 +213,32 @@ x-auth-user: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFkbWluQGNvcnJlby
 ### GUARDAR ReSULTADO EN LA BASE DE DATOS
 POST  {{url}}/api/quizzresults
 Content-Type: application/json
-x-auth-user: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFkbWluQGNvcnJlby5jb20iLCJpZCI6NCwiaWF0IjoxNTc1NDIwODY0LCJleHAiOjE1NzU0NDI0NjR9.wD1ryJTlfwaT35_TYIKpA2VEEMAkSKGTXoUOsAKQ7rY
+x-auth-user: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFkbWluQGNvcnJlby5jb20iLCJpZCI6NiwiaWF0IjoxNTc1NDk1ODQzLCJleHAiOjE1NzU1MTc0NDN9.rPvsd_oHhfL3b12lE-47Mko7r-YLDiRmdxCao8no4ZU
 
 {
       "quizz": 1001,
-      "user": 5,
-      "nickname": "MANA"
+      "user": 6,
+      "nickname": "TEST API DOC"
 }
 
 ### OBTENER TODOS LOS QUIZZES
 GET  {{url}}/api/quizzresults
-x-auth-user: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFkbWluQGNvcnJlby5jb20iLCJpZCI6NCwiaWF0IjoxNTc1NDIwODY0LCJleHAiOjE1NzU0NDI0NjR9.wD1ryJTlfwaT35_TYIKpA2VEEMAkSKGTXoUOsAKQ7rY
+x-auth-user: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFkbWluQGNvcnJlby5jb20iLCJpZCI6NiwiaWF0IjoxNTc1NDk1ODQzLCJleHAiOjE1NzU1MTc0NDN9.rPvsd_oHhfL3b12lE-47Mko7r-YLDiRmdxCao8no4ZU
 
 
 ### OBTENER QUIZZRESULT POR ID
-GET  {{url}}/api/quizzresults/1006
-x-auth-user: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFkbWluQGNvcnJlby5jb20iLCJpZCI6NCwiaWF0IjoxNTc1NDIwODY0LCJleHAiOjE1NzU0NDI0NjR9.wD1ryJTlfwaT35_TYIKpA2VEEMAkSKGTXoUOsAKQ7rY
+GET  {{url}}/api/quizzresults/19
+x-auth-user: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFkbWluQGNvcnJlby5jb20iLCJpZCI6NiwiaWF0IjoxNTc1NDk2NDIwLCJleHAiOjE1NzU1MTgwMjB9.SGMSkm__MkH9CmKXSCstt2tRM9vEJFyMvbiFZxowzrE
 
 
 ### MODIFICAR QUIZZRESULT
-PUT  {{url}}/api/quizzresults/0
+PUT  {{url}}/api/quizzresults/25
 Content-Type: application/json
-x-auth-user: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFkbWluQGNvcnJlby5jb20iLCJpZCI6NCwiaWF0IjoxNTc1NDIwODY0LCJleHAiOjE1NzU0NDI0NjR9.wD1ryJTlfwaT35_TYIKpA2VEEMAkSKGTXoUOsAKQ7rY
+x-auth-user: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFkbWluQGNvcnJlby5jb20iLCJpZCI6NiwiaWF0IjoxNTc1NDk1ODQzLCJleHAiOjE1NzU1MTc0NDN9.rPvsd_oHhfL3b12lE-47Mko7r-YLDiRmdxCao8no4ZU
 
 {
-      "quizz": 1006,
-      "user": 4,
+      "quizz": 1001,
+      "user": 6,
       "nickname": "Javi",
       "score": 50,
       "time": 77,
@@ -257,16 +257,6 @@ x-auth-user: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFkbWluQGNvcnJlby
         }
       ]
     }
-
-
-
-
-
-
-
-
-
-
 
 ###
 POST  {{url}}/api/login

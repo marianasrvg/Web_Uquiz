@@ -2,7 +2,8 @@ const jwt = require('jsonwebtoken');
 const express = require('express');
 const fs = require('fs');
 const User = require('../server/models/User');
-const Quizz = require('./models/Quizz')
+const Quizz = require('./models/Quizz');
+const QuizzRes = require('./models/QuizzResults');
 
 let privateTokenPassword = JSON.parse(fs.readFileSync('passwords.json'));
 //let users = JSON.parse(fs.readFileSync('users.json'));
@@ -126,9 +127,32 @@ let ownershipValidator = async (req, res, next) => {
     }
 }
 
+let ownershipQRValidator = async (req, res, next) => {
+    let doc = undefined
+
+    try {
+        doc = await QuizzRes.findOne({
+            user: req.body.id,
+            id: req.params.pin
+        });
+        if (!doc) {
+            res.status(400).send("You can only search your own quizzes");
+            return
+        }
+        next();
+    } catch (err) {
+        console.log(err);
+        res.status(400).send({
+            error: "Database error",
+            detalle: err
+        })
+    }
+}
+
 module.exports = {
     permissionValidator,
     tokenValidator,
     adminValidator,
-    ownershipValidator
+    ownershipValidator,
+    ownershipQRValidator
 }

@@ -85,25 +85,22 @@ let addAnswer = (e) => {
     i++;
 }
 
-let createQuizz = (event) => {
+let createQuizz = () => {
+
     let quizz = {};
     quizz.name = quizz_name.value;
     quizz.description = quizz_description.value;
     quizz.url = quizz_image.value;
     quizz.creator = localStorage.userId | "";
-    quizz.questions = questions;
-    console.log(quizz);
-
-    /*let xhr = new XMLHttpRequest();
-    let endpoint = `http://localhost:3000/quizzes`;
-    xhr.open('POST', endpoint);
-    xhr.setRequestHeader('Content-Type', 'application/json');
-    xhr.send(JSON.stringify(quizz));
-    xhr.onload = () => {
-        console.log(xhr.response);
-        window.location.href = "quizzes_owned.html";
+    if(questions.length == 0){
+        event.preventDefault();
+        alert("Add questions to submit a quizz");
+        return; 
     }
-    */
+    quizz.questions = questions;
+
+
+    event.preventDefault();
     let xhr = new XMLHttpRequest();
     let endpoint = `http://localhost:3000/api/quizz`;
     xhr.open('POST', endpoint);
@@ -111,8 +108,11 @@ let createQuizz = (event) => {
     xhr.setRequestHeader('x-auth-user', localStorage.sessionId);
     xhr.send(JSON.stringify(quizz));
     xhr.onload = () => {
-        console.log(xhr.response);
-        window.location.href = "quizzes_owned.html";
+        if(xhr.status == 201){
+            window.location.href = "quizzes_owned.html";
+        }else {
+            alert("Database error")
+        }
     }
 }
 
@@ -121,4 +121,5 @@ loadQuestions();
 btn_back.addEventListener("click", (event) => {
     window.location.href = "index.html";
 });
-btn_quizz_create.addEventListener("click", createQuizz);
+
+// btn_quizz_create.addEventListener("click", createQuizz);

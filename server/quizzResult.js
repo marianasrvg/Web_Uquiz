@@ -6,10 +6,12 @@ const middlewares = require('./middlewares');
 const joi = require('joi');
 
 router.route('/')
-    .get(middlewares.tokenValidator,async (req, res) => {
+    .get(middlewares.tokenValidator, async (req, res) => {
         try {
             let docs = [];
-            docs = await QuizzResults.find({user:req.body.id})
+            docs = await QuizzResults.find({
+                user: req.body.id
+            })
             res.send(docs);
         } catch (err) {
             console.log(err);
@@ -46,7 +48,9 @@ router.route('/')
                 return
             }
             doc = await QuizzResults.crearQuizz(quizzResults.value);
-            res.status(201).send()
+            res.status(201).send({
+                id: doc.id
+            });
         } catch (err) {
             console.log(err);
             res.status(400).send({
@@ -57,21 +61,31 @@ router.route('/')
     })
 
 router.route('/:pin')
-    .get(middlewares.tokenValidator, middlewares.ownershipValidator, async (req, res) => {
-        let quizz = req.params.pin;
-        doc = await QuizzResults.find({
-            quizz
-        })
-        if (doc) {
-            res.send(doc)
-        } else {
-            res.status(404).send({
-                error: "Quizz not found"
+    .get(middlewares.tokenValidator, middlewares.ownershipQRValidator, async (req, res) => {
+        let id = req.params.pin;
+        let doc = undefined;
+        try {
+            doc = await QuizzResults.findOne({
+                id
+            })
+            if (doc) {
+                res.send(doc)
+            } else {
+                res.status(404).send({
+                    error: "Quizz not found"
+                })
+            }
+        } catch (err) {
+            console.log(err);
+            res.status(400).send({
+                error: "Database error",
+                detalle: err
             })
         }
     })
     .put(middlewares.tokenValidator, async (req, res) => {
-        let id = req.params.id;
+        let id = req.params.pin;
+
         const schemaQuizz = {
             quizz: joi.required(),
             user: joi.required(),
@@ -84,10 +98,15 @@ router.route('/:pin')
                 correct: joi.required(),
                 answer: joi.required()
             })),
-            id: joi.required()
+            id: joi.required(),
+            _id: joi.optional(),
+            __v: joi.optional()
         }
 
         let quizz = joi.validate(req.body, schemaQuizz);
+
+        delete quizz.value.id;
+
         if (quizz.error) {
             res.status(400).send(`Bad request ${quizz.error.details[0].message}`);
             return;

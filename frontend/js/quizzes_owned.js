@@ -3,21 +3,8 @@ let closeBtn;
 let quizzes;
 
 function loadQuizzesInfo () {
-    /*let xhr = new XMLHttpRequest();
-    let endpoint = `http://localhost:3000/quizzes?creator=${localStorage.userId}`;
-    xhr.open('GET', endpoint);
-    xhr.setRequestHeader('Content-Type', 'application/json');
-    xhr.send();
-    xhr.onload = () => {
-        if(xhr.status == 200){
-            console.log(xhr.response);
-            quizzes = JSON.parse(xhr.response);
-            loadQuizzesHTML();
-        }
-    }*/
-
     let xhr = new XMLHttpRequest();
-    let endpoint = `http://localhost:3000/api/quizz/${localStorage.userId}`;
+    let endpoint = `http://localhost:3000/api/quizz`;
     xhr.open('GET', endpoint);
     xhr.setRequestHeader('Content-Type', 'application/json');
     xhr.setRequestHeader('x-auth-user', localStorage.sessionId);
@@ -29,7 +16,6 @@ function loadQuizzesInfo () {
             loadQuizzesHTML();
         }
     }
-
     return;
 }; 
 
@@ -43,13 +29,13 @@ let loadQuizzesHTML = () => {
         </td>
 
         <td class="product-name">
-            <a href="#" onclick="quizzDetails(${quizz.id})">
+            <a href="#" onclick="quizzDetails(${quizz.pin})">
                 <h3>${quizz.name}</h3>
                 <p>${quizz.description}</p>
             </a>
         </td>
 
-        <td class="price">${quizz.id}</td>
+        <td class="price">${quizz.pin}</td>
 
         <td class="product-remove">
             <a class="delete" href="#"><span class="ion-ios-close"></span></a>
@@ -64,19 +50,6 @@ let deleteQuizz = (event) => {
     pin = event.currentTarget.parentElement.previousElementSibling.innerText;
     let option = confirm(`¿Deseas eliminar el quizz con el pin ${pin}`);
     if(option == true) {
-        /*let xhr = new XMLHttpRequest();
-        let endpoint = `http://localhost:3000/quizzes/${pin}`;
-        xhr.open('DELETE', endpoint);
-        xhr.setRequestHeader('Content-Type', 'application/json');
-        xhr.send();
-        xhr.onload = () => {
-            if(xhr.status == 200){
-                console.log(xhr.response);
-                //quizzes = JSON.parse(xhr.response);
-                //loadQuizzesHTML();
-            }
-        }*/
-
         let xhr = new XMLHttpRequest();
         let endpoint = `http://localhost:3000/api/quizz/${pin}`;
         xhr.open('DELETE', endpoint);
@@ -87,7 +60,7 @@ let deleteQuizz = (event) => {
             if(xhr.status == 200){
                 console.log(xhr.response);
                 //quizzes = JSON.parse(xhr.response);
-                //loadQuizzesHTML();
+                loadQuizzesInfo();
             }
         }
 

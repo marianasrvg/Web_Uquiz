@@ -150,13 +150,13 @@
 		<div class="container">
 			<div class="row justify-content-center">
 				<div class="col-xl- ftco-animate">
-					<form action="#" class="quiz-creation-form">
+					<form onsubmit=createQuizz() id="quizz-detial" class="quiz-creation-form">
 						<h3 class="mb-4 billing-heading">Quizz Details</h3>
 						<div class="row align-items-end">
 							<div class="col-md-12">
 								<div class="form-group">
 									<label for="firstname">Quizz Name</label>
-									<input id="quizz-name" type="text" class="form-control" placeholder="Quiz Name">
+									<input id="quizz-name" type="text" class="form-control" placeholder="Quiz Name" required>
 								</div>
 							</div>
 							<div class="w-100"></div>
@@ -164,7 +164,7 @@
 								<div class="form-group">
 									<label for="quiz-desc">Description</label>
 									<textarea name="" id="quizz-description" cols="30" rows="7" class="form-control"
-										placeholder="Description"></textarea>
+										placeholder="Description" required></textarea>
 
 								</div>
 							</div>
@@ -245,7 +245,7 @@
 				<button id="btn_back" class="btn btn-primary" style="padding: 18px 40px;" >Back</button>
 				<span class="mr-3">
 				<span></span>
-				<button id="btn_quizz_create" class="btn btn-primary" style="padding: 18px 40px;" >Create</button>
+				<button id="btn_quizz_create" type="submit" form="quizz-detial" class="btn btn-primary" style="padding: 18px 40px;" >Create</button>
 				<span class="mr-3">
 				<span></span>
 			</div>

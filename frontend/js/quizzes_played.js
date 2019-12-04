@@ -1,23 +1,9 @@
-
 let quizzResults;
 let quizzesTable = document.querySelector("tbody");
 
 let loadQuizzResults = (cb) => {
-    /*let xhr = new XMLHttpRequest();
-    let endpoint = `http://localhost:3000/quizzresults?user=${localStorage.userId}`
-    xhr.open('GET', endpoint);
-    xhr.setRequestHeader('Content-Type', 'application/json');
-    xhr.send();
-    xhr.onload = () => {
-        if(xhr.status == 200){
-            //console.log(xhr.response);
-            quizzResults = JSON.parse(xhr.response);
-            cb();
-        }
-    }*/
-    
     let xhr = new XMLHttpRequest();
-    let endpoint = `http://localhost:3000/api/quizzresults/${localStorage.userId}`
+    let endpoint = `http://localhost:3000/api/quizzresults/`
     xhr.open('GET', endpoint);
     xhr.setRequestHeader('Content-Type', 'application/json');
     xhr.setRequestHeader('x-auth-user', localStorage.sessionId);
@@ -32,20 +18,6 @@ let loadQuizzResults = (cb) => {
 }
 
 function loadQuizzInfo (results) {
-    /*
-    let xhr = new XMLHttpRequest();
-    let endpoint = `http://localhost:3000/quizzes/${results.quizz}`;
-    xhr.open('GET', endpoint);
-    xhr.setRequestHeader('Content-Type', 'application/json');
-    xhr.send();
-    xhr.onload = () => {
-        if(xhr.status == 200){
-            //console.log(xhr.response);
-            //console.log(results);
-            //console.log(JSON.parse(xhr.response));
-            return loadQuizzHTML(JSON.parse(xhr.response), results);
-        }
-    }*/
 
     let xhr = new XMLHttpRequest();
     let endpoint = `http://localhost:3000/api/quizz/${results.quizz}`;
@@ -55,9 +27,6 @@ function loadQuizzInfo (results) {
     xhr.send();
     xhr.onload = () => {
         if(xhr.status == 200){
-            //console.log(xhr.response);
-            //console.log(results);
-            //console.log(JSON.parse(xhr.response));
             return loadQuizzHTML(JSON.parse(xhr.response), results);
         }
     }
@@ -66,14 +35,9 @@ function loadQuizzInfo (results) {
 
 let loadQuizzesHTML = () => {
     quizzesTable.innerHTML = "";
-    //console.log(quizzResults);
     quizzResults.forEach(element => {
         loadQuizzInfo(element)
     });
-    /*let html = quizzResults.map((quizz) => {
-        loadQuizzInfo(quizz.id);
-        console.log(quizzInfo);    
-    }).join("\n");*/
 
 }
 
@@ -101,10 +65,11 @@ let loadQuizzHTML = (quizz, results) => {
 
 let verifyUser = () => {
     if(localStorage.sessionId){
-        //loadQuizzResults for the an specific user;
+        loadQuizzResults(loadQuizzesHTML);
+        return;
     }
-    loadQuizzResults(loadQuizzesHTML);
-    return
+    window.location.href = "log-in.html";
+    return;
 }
 
 //console.log(quizzesTable);

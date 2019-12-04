@@ -18,21 +18,7 @@ let addCorrectQuestions = (quizz) => {
     quizz.correct = correct;
 }
 
-
-
 let loadQuizz = (cb) => {
-    /*let xhr = new XMLHttpRequest();
-    let endpoint = `http://localhost:3000/quizzes/${localStorage.pin}`
-    xhr.open('GET', endpoint);
-    xhr.setRequestHeader('Content-Type', 'application/json');
-    xhr.send();
-    xhr.onload = () => {
-        if(xhr.status == 200){
-            quizz = JSON.parse(xhr.response);
-            addCorrectQuestions(quizz);
-            cb(index);
-        }
-    }*/
 
     let xhr = new XMLHttpRequest();
     let endpoint = `http://localhost:3000/api/quizz/${localStorage.pin}`
@@ -44,6 +30,8 @@ let loadQuizz = (cb) => {
         if(xhr.status == 200){
             quizz = JSON.parse(xhr.response);
             addCorrectQuestions(quizz);
+            quizz.bestScore = 0;
+            quizz.worstScore = 0;
             cb(index);
         }
     }
@@ -51,17 +39,6 @@ let loadQuizz = (cb) => {
 }
 
 let loadQuizzResults = () => {
-    /*let xhr = new XMLHttpRequest();
-    let endpoint = `http://localhost:3000/quizzresults/${localStorage.quizz}`
-    xhr.open('GET', endpoint);
-    xhr.setRequestHeader('Content-Type', 'application/json');
-    xhr.send();
-    xhr.onload = () => {
-        if(xhr.status == 200){
-            quizzResults = JSON.parse(xhr.response);
-            quizzResults.answers = [];
-        }
-    }*/
     let xhr = new XMLHttpRequest();
     let endpoint = `http://localhost:3000/api/quizzresults/${localStorage.quizz}`
     xhr.open('GET', endpoint);
@@ -72,6 +49,12 @@ let loadQuizzResults = () => {
         if(xhr.status == 200){
             quizzResults = JSON.parse(xhr.response);
             quizzResults.answers = [];
+        } else if (xhr.status == 404){
+            alert("Quizz not found");
+            window.location.href = "enter-pin.html";
+        } else{
+            alert("Database problem");
+            window.location.href = "enter-pin.html";
         }
     }
 }
@@ -89,8 +72,6 @@ let loadQuestions = (index) => {
         </div>`
     }).join("");
     answers.innerHTML = html;
-    //console.log(quizz.questions[index]);
-    //console.log(quizz.questions[index].time);
     min = Math.floor(quizz.questions[index].time / 60);
     sec = quizz.questions[index].time % 60 | 0;
 }
@@ -106,8 +87,6 @@ function makeTimer() {
         sec = 60;
     }
     sec--;
-    //Store answer null
-    //loadNextQuestion
 }
 
 setInterval(function() { makeTimer(); }, 1000);
@@ -136,7 +115,8 @@ function storeAnswer(event) {
 
     index++;
 
-    if(quizz.questions[index]==undefined){
+    //Si ya no hay más preguntas
+    if (quizz.questions[index] == undefined){
         
         let totalScore = 0;
         let totalTime = 0;
@@ -151,49 +131,31 @@ function storeAnswer(event) {
         quizzResults.score = scorePercentage;
 
 
-        if(quizzResults.score >= quizz.bestScore){
+        if(quizz.bestScore == undefined || quizzResults.score >= quizz.bestScore){
             quizz.bestScore = quizzResults.score;
         }
 
-        if(quizzResults.score <= quizz.worstScore){
+        if(quizz.worstScore == undefined || quizzResults.score <= quizz.worstScore){
             quizz.worstScore = quizzResults.score;
         }
-              
-        //console.log(quizzResults);
-        /*let xhr2 = new XMLHttpRequest();
-        let endpoint2 = `http://localhost:3000/quizzes/${localStorage.pin}`
-        xhr2.open('PUT', endpoint2);
-        xhr2.setRequestHeader('Content-Type', 'application/json');
-        xhr2.send(JSON.stringify(quizz));
-        xhr2.onload = () => {
-            if(xhr2.status == 200){
-            }
-        }*/
 
         let xhr2 = new XMLHttpRequest();
         let endpoint2 = `http://localhost:3000/api/quizz/${localStorage.pin}`
         xhr2.open('PUT', endpoint2);
         xhr2.setRequestHeader('Content-Type', 'application/json');
-        xhr.setRequestHeader('x-auth-user', localStorage.sessionId);
+        xhr2.setRequestHeader('x-auth-user', localStorage.sessionId);
         xhr2.send(JSON.stringify(quizz));
         xhr2.onload = () => {
             if(xhr2.status == 200){
                 alert('success');
+            }else if(xhr2.status == 404){
+                console.log(xhr2.response);
+                alert('something is not right');
+            } else {
+                console.log(xhr2.response);
+                alert('something is not right');
             }
         }
-
-        /*let xhr = new XMLHttpRequest();
-        let endpoint = `http://localhost:3000/quizzresults/${quizzResults.id}`
-        xhr.open('PUT', endpoint);
-        xhr.setRequestHeader('Content-Type', 'application/json');
-        xhr.send(JSON.stringify(quizzResults));
-        xhr.onload = () => {
-            if(xhr.status == 200){
-                localStorage.quizz = "";
-                localStorage.score = scorePercentage;
-                window.location.href = "score.html";
-            }
-        }*/
 
         let xhr = new XMLHttpRequest();
         let endpoint = `http://localhost:3000/api/quizzresults/${quizzResults.id}`
@@ -206,14 +168,11 @@ function storeAnswer(event) {
                 localStorage.quizz = "";
                 localStorage.score = scorePercentage;
                 window.location.href = "score.html";
+            }else {
+                console.log(xhr.status+xhr.response);
             }
-        }
-
-
-        
+        } 
     }
-        
-
     loadQuestions(index);
 }
 
