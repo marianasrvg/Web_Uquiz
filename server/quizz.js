@@ -1,166 +1,190 @@
 const express = require('express');
 const Quizz = require('./models/Quizz')
 const router = express.Router();
+const joi = require('joi');
+const middlewares = require('./middlewares');
 
 //const {autenticarUser} = require("../middlewares/authUser")
 //const bcrypt = require("bcryptjs")
 
 router.route('/')
-.get( async (req, res) => {
-    try {
-        let docs = [];
-        docs = await Quizz.find({})
-        res.send(docs);
-    } catch (err) {
-        res.status(400).send({
-            error: "ocurrió un error en tu búsqueda",
-            detalle: err
-        });
-    }
-})
-.post(async (req, res) => {
-    let {
-        name,
-        description,
-        url,
-        creator,
-        bestScore,
-        worstScore,
-        played,
-        questions
-    } = req.body;
-
-    //FALTA VALIDAR CADA ATRIBUTO
-
-    let quizz = {
-        name,
-        description,
-        url,
-        creator,
-        bestScore,
-        worstScore,
-        played,
-        questions
-    };
-
-    let doc = undefined
-    try {
-        let ndoc = await Quizz.findOne({
-            name
-        })
-        if (ndoc) {
-            res.status(403).send({
-                error: "Quizz ya existe"
+    .get(middlewares.tokenValidator, middlewares.adminValidator, async (req, res) => {
+        try {
+            let docs = [];
+            docs = await Quizz.find({
+                creator: req.body.id
+            })
+            let result = docs.map((item) => {
+                let q = {
+                    name: item.name,
+                    description: item.description,
+                    score: item.score,
+                    pin: item.id,
+                    url: item.url,
+                }
+                return q;
             });
-            return
+            res.status(200).send(result);
+        } catch (err) {
+            console.log(err);
+            res.status(400).send({
+                error: "Database error",
+                detalle: err
+            })
         }
-        console.log(quizz);
-        doc = await Quizz.crearQuizz(quizz);
-        res.status(201).send()
-    } catch (err) {
-        console.log(err);
-        res.status(400).send({
-            error: "ocurrió un error revisa los datos",
-            detalle: err
-        })
-    }
+    })
+    .post(middlewares.tokenValidator, async (req, res) => {
 
-})
+        //VERIFICAR USER
+
+        const schemaQuizz = {
+            name: joi.required(),
+            description: joi.required(),
+            url: joi.optional(),
+            creator: joi.required(),
+            questions: joi.array().items(joi.object({
+                question: joi.required(),
+                time: joi.optional(),
+                url: joi.optional(),
+                answers: joi.array().items(joi.object({
+                    answer: joi.required(),
+                    correct: joi.required()
+                }))
+            })),
+            //ESTE ID es el del usuario que viene del middleware
+            id: joi.required()
+        }
+
+        let quizz = joi.validate(req.body, schemaQuizz);
+
+        if (quizz.error) {
+            res.status(400).send(`Bad request ${quizz.error.details[0].message}`);
+            return;
+        }
+        delete quizz.value.id;
+
+        let doc = undefined
+        try {
+            doc = await Quizz.crearQuizz(quizz.value);
+            res.status(201).send()
+        } catch (err) {
+            console.log(err);
+            res.status(400).send({
+                error: "Database error",
+                detalle: err
+            })
+        }
+    })
 
 router.route('/:id')
-.get( async (req, res) => {
-    let id = req.params.id;
-    doc = await Quizz.findOne({
-       // exp: req.exp,
-        id
-    }/*, {
-        _id: 0,
-        id: 1,
-        name: 1,
-        description: 1,
-        email: 1,
-        password: 1,
-        admin: 1
-    }*/)
-    if (doc) {
-        res.send(doc)
-    } else {
-        res.status(404).send({
-            error: "no se encontró el quizz"
-        })
-    }
-})
-.put(async (req, res) => {
-    let id = req.params.id;
-    let {name, description, url, creator, questions,correct} = req.body;
-
-    let quizz = {
-        name,
-        description,
-        url,
-        creator,
-        questions,
-        correct
-      };
-
-
-    let str="";
-    for (let k in quizz ){
-        if( k!= "correct" && quizz[k]==undefined  )
-            str+="Falta "+k+ ", "    
-    }
-
-    if(str.length>0){
-        res.status(400).send({error:str});
-        return
-    }
-
-    
-    console.log(quizz);
-    let doc = undefined
-    try {
+    .get(middlewares.tokenValidator, async (req, res) => {
+        let id = req.params.id;
         doc = await Quizz.findOne({
             id
         })
         if (doc) {
-            //str.password = (password ="")? doc.password : bcrypt.hashSync(password,8)
-            //str.password = (password ="")? doc.password : password
-
-            await doc.editarQuizz(quizz);
-            res.status(200).send()
-        } else {
-            res.status(404).send("No se encontró quizz")
-        }
-
-    } catch (err) {
-        res.status(400).send({
-            error: "ocurrió un error revisa los datos",
-            detalle: err
-        })
-    }
-})
-.delete(async (req, res) => {
-    let id = req.params.id;
-    let doc = undefined
-    try {
-        doc = await Quizz.findOne({id});
-        if (doc) {
-            await Quizz.findOneAndDelete({id})
-            res.status(200).send({
-                removed: doc.id
-            })
+            res.status(200).send(doc)
         } else {
             res.status(404).send({
-                error: "no se encontró usuario"
+                error: "Quizz not found"
             })
         }
+    })
+    .put(async (req, res) => {
+        let id = req.params.id;
+        /*let {
+            name,
+            description,
+            url,
+            creator,
+            questions,
+            correct
+        } = req.body;
 
-    } catch (err) {
-        res.status(400).send({
-            error: "ocurrió un error revisa los datos",
-            detalle: err
-        })
-    }
-})
+        let quizz = {
+            name,
+            description,
+            url,
+            creator,
+            questions,
+            correct
+        };*/
+        const schemaQuizz = {
+            name: joi.required(),
+            description: joi.required(),
+            url: joi.optional(),
+            creator: joi.required(),
+            bestScore: joi.optional(),
+            worstScore: joi.optional(),
+            played: joi.optional(),
+            questions: joi.array().items(joi.object({
+                question: joi.required(),
+                time: joi.optional(),
+                url: joi.optional(),
+                answers: joi.array().items(joi.object({
+                    answer: joi.required(),
+                    correct: joi.required()
+                }))
+            })),
+            correct: joi.array().items(
+                joi.array().optional()
+            ).optional()
+        }
+
+        let quizz = joi.validate(req.body, schemaQuizz);
+
+        if (quizz.error) {
+            res.status(400).send(`Bad request ${quizz.error.details[0].message}`);
+            return;
+        }
+
+        let doc = undefined
+        try {
+            doc = await Quizz.findOne({
+                id
+            })
+            if (doc) {
+                await doc.editarQuizz(quizz.value);
+                res.status(200).send()
+            } else {
+                res.status(404).send("Quizz not found")
+            }
+
+        } catch (err) {
+            console.log(err);
+            res.status(400).send({
+                error: "Database error",
+                detalle: err
+            })
+        }
+    })
+    .delete(middlewares.tokenValidator, middlewares.permissionValidator,async (req, res) => {
+        let id = req.params.id;
+        let doc = undefined
+        try {
+            doc = await Quizz.findOne({
+                id
+            });
+            if (doc) {
+                await Quizz.findOneAndDelete({
+                    id
+                })
+                res.status(200).send({
+                    removed: doc.id
+                })
+            } else {
+                res.status(404).send({
+                    error: "Quizz not found"
+                })
+            }
+
+        } catch (err) {
+            console.log(err);
+            res.status(400).send({
+                error: "Database error",
+                detalle: err
+            })
+        }
+    })
 
 module.exports = router;

@@ -10,11 +10,12 @@ router.route('/')
             let docs = [];
             docs = await User.find({})
             res.send(docs);
-        } catch (err) {
+        }  catch (err) {
+            console.log(err);
             res.status(400).send({
-                error: "ocurrió un error en tu búsqueda",
+                error: "Database error",
                 detalle: err
-            });
+            })
         }
 
     })
@@ -40,7 +41,7 @@ router.route('/')
             admin: req.body.admin,
             password: req.body.password
         };
-
+        
         let doc = undefined
 
         try {

@@ -15,8 +15,8 @@ POST {{url}}/api/login
 Content-Type: application/json
 
 {
-  "email":"javier@correo.com",
-  "password":"javipopo"
+  "email":"admin@correo.com",
+  "password":"admin"
 }
 
 ### GUARDAR USUARIO EN LA BASE DE DATOS
@@ -63,12 +63,13 @@ x-auth-user: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImphdmllckBjb3JyZW
 ### GUARDAR QUIZZ EN LA BASE DE DATOS
 POST  {{url}}/api/quizz
 Content-Type: application/json
+x-auth-user: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImphdmllckBjb3JyZW8uY29tIiwiaWQiOjMsImlhdCI6MTU3NTQxMTMyNSwiZXhwIjoxNTc1NDMyOTI1fQ.r4PjLoJQ3621Dmstvq2TE7xd3F0XmPUaUWM1BS8LakI
 
 {
-      "name": "Prueba",
+      "name": "Examen 2",
       "description": "Descripcion",
       "url": "",
-      "creator": "",
+      "creator": "4",
       "questions": [
         {
           "question": "¿Cuál es tu nieve fav?",
@@ -105,12 +106,13 @@ Content-Type: application/json
 ### GUARDAR QUIZZ EN LA BASE DE DATOS
 POST  {{url}}/api/quizz
 Content-Type: application/json
+x-auth-user: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImphdmllckBjb3JyZW8uY29tIiwiaWQiOjMsImlhdCI6MTU3NTQxMTMyNSwiZXhwIjoxNTc1NDMyOTI1fQ.r4PjLoJQ3621Dmstvq2TE7xd3F0XmPUaUWM1BS8LakI
 
  {
       "name": "Quizz 2",
       "description": "Esta es la segunda prueba",
       "url": "",
-      "creator": 1244,
+      "creator": "4",
       "questions": [
         {
           "question": "YA JALAAAAA",
@@ -131,33 +133,29 @@ Content-Type: application/json
             }
           ]
         }
-      ],
-      "correct": [
-        [
-          null,
-          null,
-          null
-        ]
       ]
     }
 
-### OBTENER TODOS LOS QUIZZES
+### OBTENER TODOS LOS QUIZZES DE UN USUARIO
 GET  {{url}}/api/quizz
+x-auth-user: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFkbWluQGNvcnJlby5jb20iLCJpZCI6NCwiaWF0IjoxNTc1NDIwODY0LCJleHAiOjE1NzU0NDI0NjR9.wD1ryJTlfwaT35_TYIKpA2VEEMAkSKGTXoUOsAKQ7rY
 
 
 ### OBTENER QUIZZ ID
-GET  {{url}}/api/quizz/1001
+GET  {{url}}/api/quizz/1006
+x-auth-user: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFkbWluQGNvcnJlby5jb20iLCJpZCI6NCwiaWF0IjoxNTc1NDIwODY0LCJleHAiOjE1NzU0NDI0NjR9.wD1ryJTlfwaT35_TYIKpA2VEEMAkSKGTXoUOsAKQ7rY
+
 
 ### MODIFICAR QUIZZ
-PUT  {{url}}/api/quizz/1000
+PUT  {{url}}/api/quizz/1006
 Content-Type: application/json
-//x-user-token: {{authUser}}
+x-auth-user: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFkbWluQGNvcnJlby5jb20iLCJpZCI6NCwiaWF0IjoxNTc1NDIwODY0LCJleHAiOjE1NzU0NDI0NjR9.wD1ryJTlfwaT35_TYIKpA2VEEMAkSKGTXoUOsAKQ7rY
 
 {
-      "name": "Prueba",
-      "description": "Descripcion",
-      "url": "",
-      "creator": "",
+      "name": "Test modificado",
+      "description": "Modificado",
+      "url": "asdfasdfasdf",
+      "creator": "4",
       "bestScore": 100,
       "worstScore": 30,
       "played": 60,
@@ -199,40 +197,48 @@ Content-Type: application/json
         [
           "Limón",
           null
+        ],[
+          "Exito",
+          null
         ]
       ]
     }
 
 
 ### DELETE QUIZZ
-DELETE  {{url}}/api/quizz/1001
+DELETE  {{url}}/api/quizz/1005
 Content-Type: application/json
-//x-user-token: {{authUser}}
+x-auth-user: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFkbWluQGNvcnJlby5jb20iLCJpZCI6NCwiaWF0IjoxNTc1NDIwODY0LCJleHAiOjE1NzU0NDI0NjR9.wD1ryJTlfwaT35_TYIKpA2VEEMAkSKGTXoUOsAKQ7rY
 
 ### GUARDAR ReSULTADO EN LA BASE DE DATOS
 POST  {{url}}/api/quizzresults
 Content-Type: application/json
+x-auth-user: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFkbWluQGNvcnJlby5jb20iLCJpZCI6NCwiaWF0IjoxNTc1NDIwODY0LCJleHAiOjE1NzU0NDI0NjR9.wD1ryJTlfwaT35_TYIKpA2VEEMAkSKGTXoUOsAKQ7rY
 
 {
-      "quizz": 1000,
-      "user": 1230,
-      "nickname": "MARIANA"
+      "quizz": 1001,
+      "user": 5,
+      "nickname": "MANA"
 }
 
 ### OBTENER TODOS LOS QUIZZES
 GET  {{url}}/api/quizzresults
+x-auth-user: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFkbWluQGNvcnJlby5jb20iLCJpZCI6NCwiaWF0IjoxNTc1NDIwODY0LCJleHAiOjE1NzU0NDI0NjR9.wD1ryJTlfwaT35_TYIKpA2VEEMAkSKGTXoUOsAKQ7rY
+
 
 ### OBTENER QUIZZRESULT POR ID
-GET  {{url}}/api/quizzresults/1
+GET  {{url}}/api/quizzresults/1006
+x-auth-user: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFkbWluQGNvcnJlby5jb20iLCJpZCI6NCwiaWF0IjoxNTc1NDIwODY0LCJleHAiOjE1NzU0NDI0NjR9.wD1ryJTlfwaT35_TYIKpA2VEEMAkSKGTXoUOsAKQ7rY
+
 
 ### MODIFICAR QUIZZRESULT
-PUT  {{url}}/api/quizzresults/1
+PUT  {{url}}/api/quizzresults/0
 Content-Type: application/json
-//x-user-token: {{authUser}}
+x-auth-user: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFkbWluQGNvcnJlby5jb20iLCJpZCI6NCwiaWF0IjoxNTc1NDIwODY0LCJleHAiOjE1NzU0NDI0NjR9.wD1ryJTlfwaT35_TYIKpA2VEEMAkSKGTXoUOsAKQ7rY
 
 {
-      "quizz": 1000,
-      "user": 1230,
+      "quizz": 1006,
+      "user": 4,
       "nickname": "Javi",
       "score": 50,
       "time": 77,
