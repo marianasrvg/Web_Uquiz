@@ -19,7 +19,7 @@ Content-Type: application/json
   "password":"admin"
 }
 
-### GUARDAR USUARIO EN LA BASE DE DATOS
+### GUARDAR USUARIO EN LA BASE DE DATOS (SING UP)
 POST  {{url}}/api/users
 Content-Type: application/json
 

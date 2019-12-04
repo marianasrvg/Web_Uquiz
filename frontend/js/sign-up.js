@@ -13,48 +13,32 @@ let btnSignUp = document.querySelector("#btnSignup");
 //CLICK SIGN UP
 function signUp() {
     event.preventDefault();
-    let newUser = {};
-    newUser.firstName = userFirstName.value;
-    newUser.lastName = userLastName.value;
-    newUser.email = userEmail.value;
-    newUser.admin = 0;
-    if(userPassword.value!=userPasswordConfirm.value){
+    if (userPassword.value != userPasswordConfirm.value) {
         alert(`Contraseñas no coinciden`);
         userPassword.value = "";
         userPasswordConfirm.value = "";
-    }else{
+    } else {
         console.log("Coinciden");
-        newUser.password = userPassword.value;
-        //window.location.href = "log-in.html";
-        
-        /*let xhr = new XMLHttpRequest();
-        let endpoint = `http://localhost:3000/users`;
-        xhr.open('POST', endpoint);
-        xhr.setRequestHeader('Content-Type', 'application/json');
-        xhr.send(JSON.stringify(newUser));
-        xhr.onload = () => {
-            if (xhr.status == 201) {
-                    window.location.href = "log-in.html";
-            } else  {
-                    alert("Something went wrong");
-            }
-        }*/
-
         let xhr = new XMLHttpRequest();
-        let endpoint = `http://localhost:3000/api/user`;
+        let endpoint = `http://localhost:3000/api/users`;
         xhr.open('POST', endpoint);
         xhr.setRequestHeader('Content-Type', 'application/json');
-        xhr.setRequestHeader('x-auth-user', localStorage.sessionId);
-        xhr.send(JSON.stringify(newUser));
+        xhr.send(JSON.stringify({
+            "firstName": userFirstName.value,
+            "lastName": userLastName.value,
+            "email": userEmail.value,
+            "admin": "0",
+            "password": userPassword.value
+        }));
         xhr.onload = () => {
             if (xhr.status == 201) {
-                    window.location.href = "log-in.html";
-            } else  {
-                    alert("Something went wrong");
+                window.location.href = "log-in.html";
+            } else {
+                alert("Something went wrong");
             }
         }
 
     }
 
-    
+
 }
