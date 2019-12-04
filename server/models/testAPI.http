@@ -1,0 +1,311 @@
+@url = http://localhost:3000
+@authUser = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJjb3JyZW8iOiJ0M0B0LmNvbSIsInVpZCI6MywiaWF0IjoxNTc1MTc5NTM1LCJleHAiOjE1NzUxODMxMzV9.eavDo40JlQIe5zk5wQdmkO5Ybvt6wL_wXbtgOpSYD40
+
+### LOGIN
+POST {{url}}/api/login
+Content-Type: application/json
+
+{
+  "email":"admin@correo.com",
+  "password":"admin"
+}
+
+### JAVI LOGIN
+POST {{url}}/api/login
+Content-Type: application/json
+
+{
+  "email":"admin@correo.com",
+  "password":"admin"
+}
+
+### GUARDAR USUARIO EN LA BASE DE DATOS
+POST  {{url}}/api/users
+Content-Type: application/json
+
+{
+    "firstName":"Admin",
+    "lastName":"Ochoa",
+    "email":"admin@correo.com",
+    "admin":"1",
+    "password":"admin"
+}
+
+### OBTENER TODOS LOS USUARIOS
+GET  {{url}}/api/users
+Content-Type: application/json
+x-auth-user: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImphdmllckBjb3JyZW8uY29tIiwiaWQiOjMsImlhdCI6MTU3NTQxMTMyNSwiZXhwIjoxNTc1NDMyOTI1fQ.r4PjLoJQ3621Dmstvq2TE7xd3F0XmPUaUWM1BS8LakI
+
+### OBTENER USUARIO POR ID
+GET  {{url}}/api/users/4
+Content-Type: application/json
+x-auth-user: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImphdmllckBjb3JyZW8uY29tIiwiaWQiOjMsImlhdCI6MTU3NTQxMTMyNSwiZXhwIjoxNTc1NDMyOTI1fQ.r4PjLoJQ3621Dmstvq2TE7xd3F0XmPUaUWM1BS8LakI
+
+### MODIFICAR USUARIO
+PUT  {{url}}/api/users/3
+Content-Type: application/json
+x-auth-user: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImphdmllckBjb3JyZW8uY29tIiwiaWQiOjMsImlhdCI6MTU3NTQxMTMyNSwiZXhwIjoxNTc1NDMyOTI1fQ.r4PjLoJQ3621Dmstvq2TE7xd3F0XmPUaUWM1BS8LakI
+
+{
+    "firstName":"MARIANA",
+    "lastName":"SIERRA",
+    "email":"MARIANA@correo.com",
+    "admin":"1",
+    "password":"JEJEJEJE"
+}
+
+### DELETE USER
+DELETE  {{url}}/api/users/3
+Content-Type: application/json
+x-auth-user: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImphdmllckBjb3JyZW8uY29tIiwiaWQiOjMsImlhdCI6MTU3NTQxMTMyNSwiZXhwIjoxNTc1NDMyOTI1fQ.r4PjLoJQ3621Dmstvq2TE7xd3F0XmPUaUWM1BS8LakI
+
+
+### GUARDAR QUIZZ EN LA BASE DE DATOS
+POST  {{url}}/api/quizz
+Content-Type: application/json
+x-auth-user: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImphdmllckBjb3JyZW8uY29tIiwiaWQiOjMsImlhdCI6MTU3NTQxMTMyNSwiZXhwIjoxNTc1NDMyOTI1fQ.r4PjLoJQ3621Dmstvq2TE7xd3F0XmPUaUWM1BS8LakI
+
+{
+      "name": "Examen 2",
+      "description": "Descripcion",
+      "url": "",
+      "creator": "4",
+      "questions": [
+        {
+          "question": "¿Cuál es tu nieve fav?",
+          "time": 90,
+          "answers": [
+            {
+              "answer": "Vainilla",
+              "correct": true
+            },
+            {
+              "answer": "Chocolate",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "question": "¿Qué paleta te gusta más",
+          "time": 60,
+          "answers": [
+            {
+              "answer": "Limón",
+              "correct": true
+            },
+            {
+              "answer": "Vainilla",
+              "correct": false
+            }
+          ]
+        }
+      ]
+    }
+
+
+### GUARDAR QUIZZ EN LA BASE DE DATOS
+POST  {{url}}/api/quizz
+Content-Type: application/json
+x-auth-user: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImphdmllckBjb3JyZW8uY29tIiwiaWQiOjMsImlhdCI6MTU3NTQxMTMyNSwiZXhwIjoxNTc1NDMyOTI1fQ.r4PjLoJQ3621Dmstvq2TE7xd3F0XmPUaUWM1BS8LakI
+
+ {
+      "name": "Quizz 2",
+      "description": "Esta es la segunda prueba",
+      "url": "",
+      "creator": "4",
+      "questions": [
+        {
+          "question": "YA JALAAAAA",
+          "time": "30",
+          "url": "",
+          "answers": [
+            {
+              "answer": "dfgfdlskñjg",
+              "correct": false
+            },
+            {
+              "answer": "sdgfsdg",
+              "correct": false
+            },
+            {
+              "answer": "asfsdf",
+              "correct": false
+            }
+          ]
+        }
+      ]
+    }
+
+### OBTENER TODOS LOS QUIZZES DE UN USUARIO
+GET  {{url}}/api/quizz
+x-auth-user: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFkbWluQGNvcnJlby5jb20iLCJpZCI6NCwiaWF0IjoxNTc1NDIwODY0LCJleHAiOjE1NzU0NDI0NjR9.wD1ryJTlfwaT35_TYIKpA2VEEMAkSKGTXoUOsAKQ7rY
+
+
+### OBTENER QUIZZ ID
+GET  {{url}}/api/quizz/1006
+x-auth-user: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFkbWluQGNvcnJlby5jb20iLCJpZCI6NCwiaWF0IjoxNTc1NDIwODY0LCJleHAiOjE1NzU0NDI0NjR9.wD1ryJTlfwaT35_TYIKpA2VEEMAkSKGTXoUOsAKQ7rY
+
+
+### MODIFICAR QUIZZ
+PUT  {{url}}/api/quizz/1006
+Content-Type: application/json
+x-auth-user: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFkbWluQGNvcnJlby5jb20iLCJpZCI6NCwiaWF0IjoxNTc1NDIwODY0LCJleHAiOjE1NzU0NDI0NjR9.wD1ryJTlfwaT35_TYIKpA2VEEMAkSKGTXoUOsAKQ7rY
+
+{
+      "name": "Test modificado",
+      "description": "Modificado",
+      "url": "asdfasdfasdf",
+      "creator": "4",
+      "bestScore": 100,
+      "worstScore": 30,
+      "played": 60,
+      "questions": [
+        {
+          "question": "¿Cuál es tu nieve fav?",
+          "time": 90,
+          "answers": [
+            {
+              "answer": "Vainilla",
+              "correct": true
+            },
+            {
+              "answer": "Chocolate",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "question": "¿Qué paleta te gusta más",
+          "time": 60,
+          "answers": [
+            {
+              "answer": "Limón",
+              "correct": true
+            },
+            {
+              "answer": "Vainilla",
+              "correct": false
+            }
+          ]
+        }
+      ],
+      "correct": [
+        [
+          "Vainilla",
+          null
+        ],
+        [
+          "Limón",
+          null
+        ],[
+          "Exito",
+          null
+        ]
+      ]
+    }
+
+
+### DELETE QUIZZ
+DELETE  {{url}}/api/quizz/1005
+Content-Type: application/json
+x-auth-user: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFkbWluQGNvcnJlby5jb20iLCJpZCI6NCwiaWF0IjoxNTc1NDIwODY0LCJleHAiOjE1NzU0NDI0NjR9.wD1ryJTlfwaT35_TYIKpA2VEEMAkSKGTXoUOsAKQ7rY
+
+### GUARDAR ReSULTADO EN LA BASE DE DATOS
+POST  {{url}}/api/quizzresults
+Content-Type: application/json
+x-auth-user: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFkbWluQGNvcnJlby5jb20iLCJpZCI6NCwiaWF0IjoxNTc1NDIwODY0LCJleHAiOjE1NzU0NDI0NjR9.wD1ryJTlfwaT35_TYIKpA2VEEMAkSKGTXoUOsAKQ7rY
+
+{
+      "quizz": 1001,
+      "user": 5,
+      "nickname": "MANA"
+}
+
+### OBTENER TODOS LOS QUIZZES
+GET  {{url}}/api/quizzresults
+x-auth-user: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFkbWluQGNvcnJlby5jb20iLCJpZCI6NCwiaWF0IjoxNTc1NDIwODY0LCJleHAiOjE1NzU0NDI0NjR9.wD1ryJTlfwaT35_TYIKpA2VEEMAkSKGTXoUOsAKQ7rY
+
+
+### OBTENER QUIZZRESULT POR ID
+GET  {{url}}/api/quizzresults/1006
+x-auth-user: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFkbWluQGNvcnJlby5jb20iLCJpZCI6NCwiaWF0IjoxNTc1NDIwODY0LCJleHAiOjE1NzU0NDI0NjR9.wD1ryJTlfwaT35_TYIKpA2VEEMAkSKGTXoUOsAKQ7rY
+
+
+### MODIFICAR QUIZZRESULT
+PUT  {{url}}/api/quizzresults/0
+Content-Type: application/json
+x-auth-user: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFkbWluQGNvcnJlby5jb20iLCJpZCI6NCwiaWF0IjoxNTc1NDIwODY0LCJleHAiOjE1NzU0NDI0NjR9.wD1ryJTlfwaT35_TYIKpA2VEEMAkSKGTXoUOsAKQ7rY
+
+{
+      "quizz": 1006,
+      "user": 4,
+      "nickname": "Javi",
+      "score": 50,
+      "time": 77,
+      "answers": [
+        {
+          "question": "question number 1",
+          "correct": true,
+          "time": 55,
+          "answer": "A"
+        },
+        {
+          "question": "question number 2",
+          "correct": false,
+          "time": 22,
+          "answer": "B"
+        }
+      ]
+    }
+
+
+
+
+
+
+
+
+
+
+
+###
+POST  {{url}}/api/login
+Content-Type: application/json
+
+{
+    "correo":"t2@t.com",
+    "password":"12345"
+}
+
+### ?nombre=L
+
+GET  {{url}}/api/users?page=0
+x-user-token: {{authUser}}
+
+###
+GET  {{url}}/api/users/t@t.com
+Content-Type: application/json
+x-user-token: {{authUser}}
+###
+PUT  {{url}}/api/users/t2@t.com
+Content-Type: application/json
+x-user-token: {{authUser}}
+
+{
+    "nombre":"L22",
+    "apellido":"G22",
+    "password":"12345",
+    "correo":"t2@t.com",
+    "sexo":"H2",
+    "fecha":"10-10-2012"
+}
+
+###
+DELETE  {{url}}/api/users/test2@test.com
+Content-Type: application/json
+x-user-token: {{authUser}}
+
+###
+GET {{url}}/api/users/t@t.com
+Content-Type: application/json
+x-user-token: {{authUser}}
