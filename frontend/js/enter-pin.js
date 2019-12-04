@@ -43,10 +43,27 @@ let verifyQuizz = (e) => {
         alert("Ingresa un pin válido");
         return;
     }
-    let xhr = new XMLHttpRequest();
+    /*let xhr = new XMLHttpRequest();
     let endpoint = `http://localhost:3000/quizzes/${input_pin.value}`
     xhr.open('GET', endpoint);
     xhr.setRequestHeader('Content-Type', 'application/json');
+    xhr.send();
+    xhr.onload = () => {
+        if(xhr.status == 200){
+            localStorage.pin = JSON.parse(xhr.response).id;
+            getUserName();
+            $("#modelId").modal('show');
+        }else if(xhr.status == 404){
+            alert("Ese pin no existe");
+            input_pin.value = "";
+        }
+    }*/
+
+    let xhr = new XMLHttpRequest();
+    let endpoint = `http://localhost:3000/api/quizz/${input_pin.value}`
+    xhr.open('GET', endpoint);
+    xhr.setRequestHeader('Content-Type', 'application/json');
+    xhr.setRequestHeader('x-auth-user', localStorage.sessionId);
     xhr.send();
     xhr.onload = () => {
         if(xhr.status == 200){
@@ -70,10 +87,23 @@ let startQuizz = (e) => {
     quizzResults.nickname = nickname.value;
     quizzResults.quizz = localStorage.pin;
     
-    let xhr = new XMLHttpRequest();
+    /*let xhr = new XMLHttpRequest();
     let endpoint = `http://localhost:3000/quizzresults`
     xhr.open('POST', endpoint);
     xhr.setRequestHeader('Content-Type', 'application/json');
+    xhr.send(JSON.stringify(quizzResults));
+    xhr.onload = () => {
+        if(xhr.status == 201){
+            localStorage.quizz = JSON.parse(xhr.response).id;
+            window.location.href = "quizz.html";
+        }
+    }*/
+
+    let xhr = new XMLHttpRequest();
+    let endpoint = `http://localhost:3000/api/quizzresults`
+    xhr.open('POST', endpoint);
+    xhr.setRequestHeader('Content-Type', 'application/json');
+    xhr.setRequestHeader('x-auth-user', localStorage.sessionId);
     xhr.send(JSON.stringify(quizzResults));
     xhr.onload = () => {
         if(xhr.status == 201){

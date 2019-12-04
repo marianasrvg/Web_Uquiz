@@ -3,10 +3,24 @@ let quizzResults;
 let quizzesTable = document.querySelector("tbody");
 
 let loadQuizzResults = (cb) => {
-    let xhr = new XMLHttpRequest();
+    /*let xhr = new XMLHttpRequest();
     let endpoint = `http://localhost:3000/quizzresults?user=${localStorage.userId}`
     xhr.open('GET', endpoint);
     xhr.setRequestHeader('Content-Type', 'application/json');
+    xhr.send();
+    xhr.onload = () => {
+        if(xhr.status == 200){
+            //console.log(xhr.response);
+            quizzResults = JSON.parse(xhr.response);
+            cb();
+        }
+    }*/
+    
+    let xhr = new XMLHttpRequest();
+    let endpoint = `http://localhost:3000/api/quizzresults/${localStorage.userId}`
+    xhr.open('GET', endpoint);
+    xhr.setRequestHeader('Content-Type', 'application/json');
+    xhr.setRequestHeader('x-auth-user', localStorage.sessionId);
     xhr.send();
     xhr.onload = () => {
         if(xhr.status == 200){
@@ -18,10 +32,26 @@ let loadQuizzResults = (cb) => {
 }
 
 function loadQuizzInfo (results) {
+    /*
     let xhr = new XMLHttpRequest();
     let endpoint = `http://localhost:3000/quizzes/${results.quizz}`;
     xhr.open('GET', endpoint);
     xhr.setRequestHeader('Content-Type', 'application/json');
+    xhr.send();
+    xhr.onload = () => {
+        if(xhr.status == 200){
+            //console.log(xhr.response);
+            //console.log(results);
+            //console.log(JSON.parse(xhr.response));
+            return loadQuizzHTML(JSON.parse(xhr.response), results);
+        }
+    }*/
+
+    let xhr = new XMLHttpRequest();
+    let endpoint = `http://localhost:3000/api/quizz/${results.quizz}`;
+    xhr.open('GET', endpoint);
+    xhr.setRequestHeader('Content-Type', 'application/json');
+    xhr.setRequestHeader('x-auth-user', localStorage.sessionId);
     xhr.send();
     xhr.onload = () => {
         if(xhr.status == 200){

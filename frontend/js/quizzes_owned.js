@@ -3,7 +3,7 @@ let closeBtn;
 let quizzes;
 
 function loadQuizzesInfo () {
-    let xhr = new XMLHttpRequest();
+    /*let xhr = new XMLHttpRequest();
     let endpoint = `http://localhost:3000/quizzes?creator=${localStorage.userId}`;
     xhr.open('GET', endpoint);
     xhr.setRequestHeader('Content-Type', 'application/json');
@@ -14,7 +14,22 @@ function loadQuizzesInfo () {
             quizzes = JSON.parse(xhr.response);
             loadQuizzesHTML();
         }
+    }*/
+
+    let xhr = new XMLHttpRequest();
+    let endpoint = `http://localhost:3000/api/quizz/${localStorage.userId}`;
+    xhr.open('GET', endpoint);
+    xhr.setRequestHeader('Content-Type', 'application/json');
+    xhr.setRequestHeader('x-auth-user', localStorage.sessionId);
+    xhr.send();
+    xhr.onload = () => {
+        if(xhr.status == 200){
+            console.log(xhr.response);
+            quizzes = JSON.parse(xhr.response);
+            loadQuizzesHTML();
+        }
     }
+
     return;
 }; 
 
@@ -49,7 +64,7 @@ let deleteQuizz = (event) => {
     pin = event.currentTarget.parentElement.previousElementSibling.innerText;
     let option = confirm(`¿Deseas eliminar el quizz con el pin ${pin}`);
     if(option == true) {
-        let xhr = new XMLHttpRequest();
+        /*let xhr = new XMLHttpRequest();
         let endpoint = `http://localhost:3000/quizzes/${pin}`;
         xhr.open('DELETE', endpoint);
         xhr.setRequestHeader('Content-Type', 'application/json');
@@ -60,7 +75,22 @@ let deleteQuizz = (event) => {
                 //quizzes = JSON.parse(xhr.response);
                 //loadQuizzesHTML();
             }
+        }*/
+
+        let xhr = new XMLHttpRequest();
+        let endpoint = `http://localhost:3000/api/quizz/${pin}`;
+        xhr.open('DELETE', endpoint);
+        xhr.setRequestHeader('Content-Type', 'application/json');
+        xhr.setRequestHeader('x-auth-user', localStorage.sessionId);
+        xhr.send();
+        xhr.onload = () => {
+            if(xhr.status == 200){
+                console.log(xhr.response);
+                //quizzes = JSON.parse(xhr.response);
+                //loadQuizzesHTML();
+            }
         }
+
     } 
     return;
 }

@@ -9,7 +9,7 @@ let quizz;
 let loadData = () => {
     if(localStorage.quizzDetails){
         pin = localStorage.quizzDetails;
-        let xhr = new XMLHttpRequest();
+        /*let xhr = new XMLHttpRequest();
         let endpoint = `http://localhost:3000/quizzes/${pin}`;
         xhr.open('GET', endpoint);
         xhr.setRequestHeader('Content-Type', 'application/json');
@@ -18,6 +18,23 @@ let loadData = () => {
             if(xhr.status == 200){
                 quizz = JSON.parse(xhr.response);
                 loadHTML();
+            }
+            return;
+        }*/
+        let xhr = new XMLHttpRequest();
+        let endpoint = `http://localhost:3000/api/quizz/${pin}`;
+        xhr.open('GET', endpoint);
+        xhr.setRequestHeader('Content-Type', 'application/json');
+        xhr.setRequestHeader('x-auth-user', localStorage.sessionId);
+        xhr.send();
+        xhr.onload = () => {
+            if(xhr.status == 200){
+                quizz = JSON.parse(xhr.response);
+                loadHTML();
+            }else if (xhr.status == 402) {
+                alert("Middleware Validation Error");
+            } else{
+                alert('Error');
             }
             return;
         }
@@ -30,7 +47,7 @@ let loadCSV = () => {
     if(localStorage.quizzDetails){
         console.log("entra a funcion");
         pin = localStorage.quizzInfo = pin;
-        let xhr = new XMLHttpRequest();
+        /*let xhr = new XMLHttpRequest();
         let endpoint = `http://localhost:3000/quizzresults?quizz=${pin}`;
         xhr.open('GET', endpoint);
         xhr.setRequestHeader('Content-Type', 'application/json');
@@ -38,6 +55,21 @@ let loadCSV = () => {
         xhr.onload = () => {
             if(xhr.status == 200){
                 console.log("si jala");
+                console.log(xhr.response);
+                //loadHTML();
+            }
+            return;
+        }*/
+
+        let xhr = new XMLHttpRequest();
+        let endpoint = `http://localhost:3000/api/quizzresults/${pin}`;
+        xhr.open('GET', endpoint);
+        xhr.setRequestHeader('Content-Type', 'application/json');
+        xhr.setRequestHeader('x-auth-user', localStorage.sessionId);
+        xhr.send();
+        xhr.onload = () => {
+            if(xhr.status == 200){
+                //console.log("si jala");
                 console.log(xhr.response);
                 //loadHTML();
             }

@@ -94,10 +94,21 @@ let createQuizz = (event) => {
     quizz.questions = questions;
     console.log(quizz);
 
-    let xhr = new XMLHttpRequest();
+    /*let xhr = new XMLHttpRequest();
     let endpoint = `http://localhost:3000/quizzes`;
     xhr.open('POST', endpoint);
     xhr.setRequestHeader('Content-Type', 'application/json');
+    xhr.send(JSON.stringify(quizz));
+    xhr.onload = () => {
+        console.log(xhr.response);
+        window.location.href = "quizzes_owned.html";
+    }
+    */
+    let xhr = new XMLHttpRequest();
+    let endpoint = `http://localhost:3000/api/quizz`;
+    xhr.open('POST', endpoint);
+    xhr.setRequestHeader('Content-Type', 'application/json');
+    xhr.setRequestHeader('x-auth-user', localStorage.sessionId);
     xhr.send(JSON.stringify(quizz));
     xhr.onload = () => {
         console.log(xhr.response);

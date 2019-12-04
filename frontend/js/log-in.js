@@ -11,26 +11,28 @@ let userPassword = document.querySelector('#userPassword');
 //CLICK LOGIN
 function logIn() {
     let xhr = new XMLHttpRequest();
-    console.log(userEmail.value);
-    let endpoint = `http://localhost:3000/users/?email=${userEmail.value}`
-    xhr.open('GET', endpoint);
+    let data = {};
+    data.email = userEmail;
+    data.password = userPassword;
+    //console.log(userEmail.value);
+    //let endpoint = `http://localhost:3000/users/?email=${userEmail.value}`
+    let endpoint = `http://localhost:3000/api/login`
+    xhr.open('POST', endpoint);
     xhr.setRequestHeader('Content-Type', 'application/json');
-    xhr.send();
+    xhr.send(JSON.stringify(data));
     xhr.onload = () => {
         if (xhr.status == 200) {
-            let user = JSON.parse(xhr.response);
-            if (user[0].password == userPassword.value) {
-                alert(`Bienvenido ${user[0].firstName} ${user[0].lastName}`);
-                localStorage.sessionId = "TOKEN";
-                localStorage.sessionName = user[0].firstName;
-                localStorage.userId = user[0].id;
-                localStorage.isAdmin = user[0].admin;
-                window.location.href="index.html";
-            }else{
-                alert("Usuario o contraseña incorrectos");
-            }
-        } else if (xhr.status == 404) {
-            alert("Usuario o contraseña incorrectos");
+            let response = JSON.parse(xhr.response); 
+            //let user = JSON.parse(xhr.response);
+            alert(`Bienvenido ${response.firstName}`);
+            localStorage.sessionId = response.token;
+            localStorage.sessionName =response.firstName;
+            localStorage.userId = response.id;
+            localStorage.isAdmin = response.admin;
+            window.location.href="index.html";
+           
+        } else if (xhr.status == 400){
+            alert("Invalid Crdentials");
         }
     }
 }
