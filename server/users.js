@@ -65,7 +65,7 @@ router.route('/')
 
 
 router.route('/:id')
-    .get(middlewares.tokenValidator, middlewares.permissionValidator, async (req, res) => {
+    .get(middlewares.tokenValidator, middlewares.adminValidator, async (req, res) => {
         let id = req.params.id;
         doc = await User.findOne({
             id
@@ -95,16 +95,18 @@ router.route('/:id')
             email: joi.required(),
             admin: joi.required(),
             password: joi.required(),
-            id: joi.optional(),
+            id: joi.required(),
         }
+       
         let result = joi.validate(req.body, schemaEdit);
+        delete result.value.id;
 
         if (result.error) {
             res.status(400).send(`Bad Request,${result.error.details[0].message}`);
             return
         }
 
-        console.log(result.value);
+      
         let doc = undefined
         try {
             doc = await User.findOne({

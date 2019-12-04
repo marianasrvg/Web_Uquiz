@@ -39,6 +39,4 @@ function signUp() {
         }
 
     }
-
-
 }

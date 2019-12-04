@@ -15,8 +15,8 @@ POST {{url}}/api/login
 Content-Type: application/json
 
 {
-  "email":"admin@correo.com",
-  "password":"admin"
+  "email":"diego@correo.com",
+  "password":"diego"
 }
 
 ### GUARDAR USUARIO EN LA BASE DE DATOS (SING UP)
@@ -25,7 +25,7 @@ Content-Type: application/json
 
 {
     "firstName":"Admin",
-    "lastName":"Ochoa",
+    "lastName":"User",
     "email":"admin@correo.com",
     "admin":"1",
     "password":"admin"
@@ -34,24 +34,24 @@ Content-Type: application/json
 ### OBTENER TODOS LOS USUARIOS
 GET  {{url}}/api/users
 Content-Type: application/json
-x-auth-user: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImphdmllckBjb3JyZW8uY29tIiwiaWQiOjMsImlhdCI6MTU3NTQxMTMyNSwiZXhwIjoxNTc1NDMyOTI1fQ.r4PjLoJQ3621Dmstvq2TE7xd3F0XmPUaUWM1BS8LakI
+x-auth-user: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFkbWluQGNvcnJlby5jb20iLCJpZCI6MywiaWF0IjoxNTc1NDg5MzY4LCJleHAiOjE1NzU1MTA5Njh9.FBt6Dys03GPwYrDx0q--mAE7nyGay2qWL6x9zExZpIE
 
 ### OBTENER USUARIO POR ID
 GET  {{url}}/api/users/4
 Content-Type: application/json
-x-auth-user: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImphdmllckBjb3JyZW8uY29tIiwiaWQiOjMsImlhdCI6MTU3NTQxMTMyNSwiZXhwIjoxNTc1NDMyOTI1fQ.r4PjLoJQ3621Dmstvq2TE7xd3F0XmPUaUWM1BS8LakI
+x-auth-user: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFkbWluQGNvcnJlby5jb20iLCJpZCI6MywiaWF0IjoxNTc1NDg5MzY4LCJleHAiOjE1NzU1MTA5Njh9.FBt6Dys03GPwYrDx0q--mAE7nyGay2qWL6x9zExZpIE
 
 ### MODIFICAR USUARIO
 PUT  {{url}}/api/users/3
 Content-Type: application/json
-x-auth-user: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImphdmllckBjb3JyZW8uY29tIiwiaWQiOjMsImlhdCI6MTU3NTQxMTMyNSwiZXhwIjoxNTc1NDMyOTI1fQ.r4PjLoJQ3621Dmstvq2TE7xd3F0XmPUaUWM1BS8LakI
+x-auth-user: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImRpZWdvQGNvcnJlby5jb20iLCJpZCI6MywiaWF0IjoxNTc1NDkwNDU5LCJleHAiOjE1NzU1MTIwNTl9.eLx7apgMcreV81Lz1BM-32cW5VDc0I-ff1P32M8W2Q8
 
 {
-    "firstName":"MARIANA",
-    "lastName":"SIERRA",
-    "email":"MARIANA@correo.com",
-    "admin":"1",
-    "password":"JEJEJEJE"
+    "firstName":"Diego",
+    "lastName":"Ascencio Cano",
+    "email":"diego@correo.com",
+    "admin":"0",
+    "password":"diego"
 }
 
 ### DELETE USER
@@ -63,7 +63,7 @@ x-auth-user: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImphdmllckBjb3JyZW
 ### GUARDAR QUIZZ EN LA BASE DE DATOS
 POST  {{url}}/api/quizz
 Content-Type: application/json
-x-auth-user: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImphdmllckBjb3JyZW8uY29tIiwiaWQiOjMsImlhdCI6MTU3NTQxMTMyNSwiZXhwIjoxNTc1NDMyOTI1fQ.r4PjLoJQ3621Dmstvq2TE7xd3F0XmPUaUWM1BS8LakI
+x-auth-user: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFkbWluQGNvcnJlby5jb20iLCJpZCI6MywiaWF0IjoxNTc1NDg5NjAyLCJleHAiOjE1NzU1MTEyMDJ9.nhb6JRYrEbvDyBdStV4h6loWdNOUSrnPQ5RuoicCIjw
 
 {
       "name": "Examen 2",
@@ -147,9 +147,9 @@ x-auth-user: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFkbWluQGNvcnJlby
 
 
 ### MODIFICAR QUIZZ
-PUT  {{url}}/api/quizz/1006
+PUT  {{url}}/api/quizz/1000
 Content-Type: application/json
-x-auth-user: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFkbWluQGNvcnJlby5jb20iLCJpZCI6NCwiaWF0IjoxNTc1NDIwODY0LCJleHAiOjE1NzU0NDI0NjR9.wD1ryJTlfwaT35_TYIKpA2VEEMAkSKGTXoUOsAKQ7rY
+x-auth-user: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFkbWluQGNvcnJlby5jb20iLCJpZCI6MCwiaWF0IjoxNTc1NDg3MDYxLCJleHAiOjE1NzU1MDg2NjF9.0Xlix3jHkT378iX_85ISnnWOj-m-OnHr28VrWK68Vio
 
 {
       "name": "Test modificado",

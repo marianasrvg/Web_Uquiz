@@ -3,7 +3,6 @@ const Config = require ('./Config')
 const conf = require('./config.json')
 //const bcrypt = require('bcryptjs')
 
-
 let userSchema = mongoose.Schema({
     id:{
         type: Number,
@@ -58,10 +57,10 @@ userSchema.statics.crearUsuario = async function(usr){
 //EDITAR USUARIO
 userSchema.methods.editarUsuario = function(datos){
     return User.findOneAndUpdate(
-                {_id:this._id},
-                {$set:datos},
-                {new: true}
-                );
+        {_id:this._id},
+        {$set:datos},
+        {new: true}
+        );
     
 }
 

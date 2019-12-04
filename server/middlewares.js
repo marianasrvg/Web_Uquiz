@@ -87,6 +87,7 @@ let permissionValidator = async (req, res, next) => {
         }
         if (ndoc.admin == 1) {
             next();
+            return;
         }
         let paramID = req.params.id;
         if (paramID == req.body.id) {

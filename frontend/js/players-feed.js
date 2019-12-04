@@ -3,27 +3,14 @@ let users_table = document.querySelector("#users-table");
 let users = [];
 
 let loadUsers = () => {
-    /*let xhr = new XMLHttpRequest();
-    let endpoint = `http://localhost:3000/users`;
-    xhr.open('GET', endpoint);
-    xhr.setRequestHeader('Content-Type', 'application/json');
-    xhr.send();
-    xhr.onload = () => {
-        if (xhr.status == 200) {
-            console.log(xhr.response);
-            users = JSON.parse(xhr.response);
-            loadUsersHTML();
-        }
-    }*/
     let xhr = new XMLHttpRequest();
-    let endpoint = `http://localhost:3000/api/user`;
+    let endpoint = `http://localhost:3000/api/users`;
     xhr.open('GET', endpoint);
     xhr.setRequestHeader('Content-Type', 'application/json');
     xhr.setRequestHeader('x-auth-user', localStorage.sessionId);
     xhr.send();
     xhr.onload = () => {
         if (xhr.status == 200) {
-            console.log(xhr.response);
             users = JSON.parse(xhr.response);
             loadUsersHTML();
         }else if(xhr.status == 402){
@@ -34,12 +21,12 @@ let loadUsers = () => {
 }
 
 let loadUsersHTML = () => {
-    console.log("loadUsers");
     users_table.innerHTML = "";
+    console.log("loadusers");
     let html = users.map((user) => {
         return `<tr class="text-center">
                     <td>
-                        <input type="checkbox">
+                        <input  id="CB-${user.id}" type="checkbox" ${(user.admin==0)?">":"checked >"}
                     </td>
                     <td>
                         <p id="user-id">${user.id}</p>
@@ -52,9 +39,9 @@ let loadUsersHTML = () => {
                         <h3>${user.email}</h3>
                     </td>
                     <td class="product-remove">
-                        <a id="${user.id}" ><span class="ion-ios-close"></span></a>
+                        <a id="${user.id}" ><span id=${user.id} class="ion-ios-close"></></a>
                         <a data-toggle="modal"
-                        data-target="#modelId" id=m"${user.id}"><span class="ion-ios-more"></span></a>
+                        data-target="#modelId" id=m"${user.id}"><span id=m"${user.id} class="ion-ios-more"></span></a>
                     </td>
                 </tr>`;
     }).join("\n");
@@ -67,19 +54,8 @@ let btnDelete = document.querySelectorAll('.ion-ios-close');
 
 //DELETE USER 
 let deleteUsers = (id) => {
-    console.log(id);
-    /*let xhr = new XMLHttpRequest();
-    let endpoint = `http://localhost:3000/users/${id}`;
-    xhr.open('DELETE', endpoint);
-    xhr.setRequestHeader('Content-Type', 'application/json');
-    xhr.send();
-    xhr.onload = () => {
-        if (xhr.status == 200) {
-            console.log(xhr.response);
-        }
-    }*/
     let xhr = new XMLHttpRequest();
-    let endpoint = `http://localhost:3000/api/user/${id}`;
+    let endpoint = `http://localhost:3000/api/users/${id}`;
     xhr.open('DELETE', endpoint);
     xhr.setRequestHeader('Content-Type', 'application/json');
     xhr.setRequestHeader('x-auth-user', localStorage.sessionId);
@@ -87,6 +63,7 @@ let deleteUsers = (id) => {
     xhr.onload = () => {
         if (xhr.status == 200) {
             console.log(xhr.response);
+            loadUsers();
         }
     }
     return;
@@ -105,53 +82,30 @@ let user;
 
 //EDIT USER 
 let editUsers = (id) => {
-    console.log("Edit users")
-
-    /*let xhr = new XMLHttpRequest();
-    let endpoint = `http://localhost:3000/users/${id}`;
-    console.log(endpoint);
-    xhr.open('GET', endpoint);
-    xhr.setRequestHeader('Content-Type', 'application/json');
-    xhr.send();
-    xhr.onload = () => {
-        console.log(xhr.response);
-        if (xhr.status == 200) {
-            user = JSON.parse(xhr.response);
-            console.log(user)
-            userFirstName.value = user.firstName;
-            userLastName.value = user.lastName;
-            userPassword.value = user.password;
-            userEmail = user.email;
-        }
-    }*/
-
     let xhr = new XMLHttpRequest();
-    let endpoint = `http://localhost:3000/api/user/${id}`;
+    let endpoint = `http://localhost:3000/api/users/${id}`;
     xhr.open('GET', endpoint);
     xhr.setRequestHeader('Content-Type', 'application/json');
     xhr.setRequestHeader('x-auth-user', localStorage.sessionId);
     xhr.send();
     xhr.onload = () => {
-        console.log(xhr.response);
         if (xhr.status == 200) {
             user = JSON.parse(xhr.response);
-            console.log(user)
             userFirstName.value = user.firstName;
             userLastName.value = user.lastName;
             userPassword.value = user.password;
             userEmail = user.email;
         }
     }
-
     return;
 }
 
 //DELETE USER EVENT
 users_table.addEventListener('click', (e) => {
+    console.log(e.target.id);
     if (e.target.id > 0 && e.target.id < 1000000) {
         console.log(typeof parseInt(e.target.id));
         deleteUsers(parseInt(e.target.id));
-        loadUsersHTML();
     } else {
         console.log(e.target.closest('a').id.slice(2, e.target.closest('a').id.length - 1));
         id = e.target.closest('a').id.slice(2, e.target.closest('a').id.length - 1);
@@ -161,38 +115,34 @@ users_table.addEventListener('click', (e) => {
 
 //EDIT PLAYER 
 let saveChanges = () => {
-    console.log(user);
-    user.firstName = userFirstName.value;
-    user.lastName = userLastName.value;
-    user.email = userEmail;
-    user.password = userPassword.value;
+
     //Falta pasarle el admin
-
-
-    /*let xhr = new XMLHttpRequest();
-    let endpoint = `http://localhost:3000/users/${id}`
-    xhr.open('PUT', endpoint);
-    xhr.setRequestHeader('Content-Type', 'application/json');
-    xhr.send(JSON.stringify(user));
-    xhr.onload = () => {
-        if (xhr.status == 200) {
-            console.log("Usuario editado");
-        } else {
-            console.log("No se pudo editar el usuario");
-        }
-    }*/
-
+    console.log({
+        "firstName":userFirstName.value,
+        "lastName": userLastName.value,
+        "email":userEmail,
+        "admin":(document.getElementById(`CB-${id}`).checked==true?1:0),
+        "password":userPassword.value
+    });
+    console.log(id);
+    
     let xhr = new XMLHttpRequest();
-    let endpoint = `http://localhost:3000/api/user/${id}`
+    let endpoint = `http://localhost:3000/api/users/${id}`
     xhr.open('PUT', endpoint);
     xhr.setRequestHeader('Content-Type', 'application/json');
     xhr.setRequestHeader('x-auth-user', localStorage.sessionId);
-    xhr.send(JSON.stringify(user));
+    xhr.send(JSON.stringify({
+        "firstName":userFirstName.value,
+        "lastName": userLastName.value,
+        "email":userEmail,
+        "admin":(document.getElementById(`CB-${id}`).checked==true?1:0),
+        "password":userPassword.value
+    }));
     xhr.onload = () => {
         if (xhr.status == 200) {
-            console.log("Usuario editado");
+            console.log("User edited");
         } else {
-            console.log("No se pudo editar el usuario");
+            console.log(xhr.response);
         }
     }
 
