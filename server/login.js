@@ -52,7 +52,7 @@ router.post("/", async (req,res) => {
                 });
     
             resBody.token = token;
-            resBody.firsName = ndoc.firstName;
+            resBody.firstName = ndoc.firstName;
             resBody.id = ndoc.id;
             resBody.admin = ndoc.admin;
             passwords.password = privatePassword;

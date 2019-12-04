@@ -2,6 +2,7 @@ const express = require('express');
 const login = require('./login');
 const users = require('./users');
 const quizz = require('./quizz');
+const cors = require('cors');
 //API
 //const quizzresults = require("./middlewares/quizzresults");
 
@@ -11,7 +12,9 @@ const quizzResult = require('./quizzResult');
 const app = express();
 const port = 3000;
 
+app.use(cors());
 app.use(express.json());
+
 
 app.use('/api/login', login);
 app.use('/api/users', users);
