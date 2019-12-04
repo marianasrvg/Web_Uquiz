@@ -37,7 +37,7 @@ Content-Type: application/json
 x-auth-user: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImphdmllckBjb3JyZW8uY29tIiwiaWQiOjMsImlhdCI6MTU3NTQxMTMyNSwiZXhwIjoxNTc1NDMyOTI1fQ.r4PjLoJQ3621Dmstvq2TE7xd3F0XmPUaUWM1BS8LakI
 
 ### OBTENER USUARIO POR ID
-GET  {{url}}/api/users/3
+GET  {{url}}/api/users/4
 Content-Type: application/json
 x-auth-user: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImphdmllckBjb3JyZW8uY29tIiwiaWQiOjMsImlhdCI6MTU3NTQxMTMyNSwiZXhwIjoxNTc1NDMyOTI1fQ.r4PjLoJQ3621Dmstvq2TE7xd3F0XmPUaUWM1BS8LakI
 
